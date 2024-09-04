@@ -13,8 +13,8 @@ public interface ExpenseDataProvider {
     Expense findById(String id);
 
     List<Expense> findAll(
-            Integer limit,
-            Integer Offset
+            Integer offset,
+            Integer limit
     );
 
     Expense update(
