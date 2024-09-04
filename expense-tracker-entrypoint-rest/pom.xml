@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- #########################################################################  -->
+	<!-- #### P A R E N T _ P R O J E C T ######################################## -->
+	<!-- ######################################################################### -->
+
+	<parent>
+		<groupId>com.portfolio</groupId>
+		<artifactId>expense-tracker</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<!-- #########################################################################  -->
+	<!-- #### P R O J E C T _ D E S C R I P T I O N ############################## -->
+	<!-- ######################################################################### -->
+
+	<artifactId>expense-tracker-entrypoint-rest</artifactId>
+	<name>Expense Tracker :: Entry Point REST</name>
+	<description>Expense Tracker Entry Point REST Module</description>
+
+	<!-- #########################################################################  -->
+	<!-- #### P R O J E C T _ D E P E N D E N C I E S ############################ -->
+	<!-- ######################################################################### -->
+
+	<dependencies>
+		<!-- internal dependencies -->
+		<dependency>
+			<groupId>com.portfolio</groupId>
+			<artifactId>expense-tracker-core</artifactId>
+		</dependency>
+
+		<!-- external dependencies -->
+
+		<!-- JWT validation -->
+		<!--		<dependency>-->
+		<!--			<groupId>org.bitbucket.b_c</groupId>-->
+		<!--			<artifactId>jose4j</artifactId>-->
+		<!--			<version>${jose4j.version}</version>-->
+		<!--		</dependency>-->
+
+		<!--		&lt;!&ndash; Spring Security &ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--		</dependency>-->
+	</dependencies>
+
+	<!-- #########################################################################  -->
+	<!-- #### P R O J E C T _ P R O P E R T I E S ################################ -->
+	<!-- ######################################################################### -->
+
+	<properties>
+		<jose4j.version>0.9.6</jose4j.version>
+	</properties>
+
+	<!-- #########################################################################  -->
+	<!-- #### P R O J E C T _ B U I L D ########################################## -->
+	<!-- ######################################################################### -->
+
+	<build>
+	</build>
+
+</project>
