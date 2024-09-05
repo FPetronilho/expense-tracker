@@ -17,7 +17,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/expenses")
 @Validated
-public interface ExpenseTrackerRestApi {
+public interface ExpenseRestApi {
 
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
