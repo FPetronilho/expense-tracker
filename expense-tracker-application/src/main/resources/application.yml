@@ -1,0 +1,22 @@
+###################  Microservice base configuration  ###################
+spring.application:
+  name: expense-tracker
+  version: 0.0.1-SNAPSHOT
+
+server:
+  port: 8080
+  ssl.enabled: false # disable https
+  servlet.context-path: /${spring.application.name}
+
+logging.level:
+  root: INFO
+  org.springframework: INFO
+  com.portfolio: INFO
+
+###################  MongoDB configuration  ###################
+spring.data.mongodb:
+  uri: mongodb://localhost:27017/ExpenseTracker
+  auto-index-creation: true
+
+###################  MongoDB configuration  ###################
+db.populateOnStartUp: true
