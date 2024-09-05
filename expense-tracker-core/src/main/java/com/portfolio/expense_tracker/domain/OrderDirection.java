@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @RequiredArgsConstructor
-public enum Direction {
+public enum OrderDirection {
 
     ASC("ascending"),
     DESC("descending");
