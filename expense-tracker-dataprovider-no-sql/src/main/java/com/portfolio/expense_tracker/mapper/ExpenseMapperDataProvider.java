@@ -33,7 +33,7 @@ public interface ExpenseMapperDataProvider {
             @MappingTarget ExpenseDocument expenseDocument,
             ExpenseUpdate expenseUpdate
     );
-    
+
     @Mapping(
             target = "id",
             expression = "java(java.util.UUID.randomUUID().toString())"
