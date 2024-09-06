@@ -22,7 +22,7 @@ public class ExpenseDocument extends BaseDocument {
     @Indexed(unique = true)
     private String id;
 
-    private ExpenseCategory category;
+    private String category;
     private String description;
     private Float amount;
 }

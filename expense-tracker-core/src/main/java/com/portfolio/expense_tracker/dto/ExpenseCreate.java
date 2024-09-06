@@ -16,7 +16,7 @@ import lombok.*;
 public class ExpenseCreate {
 
     @NotNull(message = Constants.EXPENSE_CATEGORY_MANDATORY_MSG)
-    private ExpenseCategory category;
+    private String category;
 
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Expense {
 
     private String id;
-    private ExpenseCategory category;
+    private String category;
     private String description;
     private Float amount;
     private LocalDateTime date;
