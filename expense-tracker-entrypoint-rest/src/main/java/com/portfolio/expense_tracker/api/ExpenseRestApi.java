@@ -27,8 +27,7 @@ public interface ExpenseRestApi {
 
     @GetMapping(
             path = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Expense> findById(
             @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id

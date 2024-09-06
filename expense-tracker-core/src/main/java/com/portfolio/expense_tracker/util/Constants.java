@@ -11,6 +11,11 @@ public class Constants {
     public static final String DEFAULT_DIRECTION = "ASC";
 
 
+    // Database
+    public static final String CREATED_AT_DB_FIELD = "createdAt";
+    public static final String UPDATED_AT_DB_FIELD = "updatedAt";
+
+
     // Required fields validation
     public static final String EXPENSE_CATEGORY_MANDATORY_MSG = "'category' is mandatory.";
     public static final String EXPENSE_AMOUNT_MANDATORY_MSG = "'amount' is mandatory.";

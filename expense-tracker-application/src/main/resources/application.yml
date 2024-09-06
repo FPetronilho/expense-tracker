@@ -6,7 +6,6 @@ spring.application:
 server:
   port: 8080
   ssl.enabled: false # disable https
-  servlet.context-path: /${spring.application.name}
 
 logging.level:
   root: INFO
