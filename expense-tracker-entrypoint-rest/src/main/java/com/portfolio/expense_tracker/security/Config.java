@@ -35,7 +35,7 @@ public class Config {
     private final ObjectMapper jsonMapper = new ObjectMapper();
     private final AuthenticationFilter filter;
 
-    @Value("${spring.application.environment}")
+    @Value("local")
     private String environment;
 
     @Bean

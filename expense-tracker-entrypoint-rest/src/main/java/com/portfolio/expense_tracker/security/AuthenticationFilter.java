@@ -20,6 +20,7 @@ import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.MalformedClaimException;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
+import org.jose4j.keys.HmacKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -79,6 +80,17 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     }
 
     @PostConstruct
+    public void init() {
+        if (!StringUtils.hasText(secret) ||
+                secret.length() != AuthenticationConstants.Authentication.Jwt.ALGORITHM_KEY_SIZE_BYTES) {
+
+            throw new AuthenticationFailedException("Jwt signature (HMAC) key is not properly set.");
+        }
+
+        key = new HmacKey(secret.getBytes());
+    }
+
+    @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
