@@ -98,6 +98,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         try {
             String jwt = request.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
             if (!StringUtils.hasText(jwt)) {
                 throw new AuthenticationFailedException(
                         String.format(
@@ -108,11 +109,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             }
 
             jwt = jwt.substring(AuthenticationConstants.Authentication.Jwt.PREFIX.length());
-
             JwtClaims claims = validateJwt(jwt);
-
             setSecurityContext(request, claims);
-
             filterChain.doFilter(request, response);
 
         } catch (BusinessException e) {

@@ -35,7 +35,7 @@ public class AuthenticationConstants {
                 Therefore, the JWT signature key must have 64 characters.
              */
             public static final int ALGORITHM_KEY_SIZE_BYTES = 64;
-            public static final String PREFIX = "Bearer";
+            public static final String PREFIX = "Bearer ";
             public static final String ISSUER = "auth8";
             public static final int ALLOWED_CLOCK_SKEW_SECONDS = 30;
             public static final String AUDIENCE = "expense-tracker";

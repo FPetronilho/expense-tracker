@@ -35,7 +35,7 @@ public class Config {
     private final ObjectMapper jsonMapper = new ObjectMapper();
     private final AuthenticationFilter filter;
 
-    @Value("local")
+    @Value("${spring.application.environment}")
     private String environment;
 
     @Bean
@@ -84,7 +84,9 @@ public class Config {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
                 security.authorizeRequests();
 
-        for (AuthenticationConstants.Authentication.Scope scope : AuthenticationConstants.Authentication.Scope.values()) {
+        for (AuthenticationConstants.Authentication.Scope scope :
+                AuthenticationConstants.Authentication.Scope.values()) {
+
             registry.requestMatchers(
                     scope.getHttpMethod(),
                     scope.getUri(),
@@ -98,6 +100,7 @@ public class Config {
 
     private AccessDeniedHandler accessDeniedHandler() {
         return (request, response, accessDeniedException) -> {
+
             BusinessException businessException = new BusinessException(
                     ExceptionCode.CLIENT_NOT_AUTHORIZED,
                     String.format("Not authorized to access: %s", request.getRequestURI())
