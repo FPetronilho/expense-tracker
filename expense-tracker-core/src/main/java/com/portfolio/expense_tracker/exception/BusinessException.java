@@ -17,4 +17,12 @@ public class BusinessException extends RuntimeException {
         this.reason = exceptionCode.getReason();
         this.message = message;
     }
+
+    public BusinessException(ExceptionCode exceptionCode) {
+        super();
+        this.code = exceptionCode.getCode();
+        this.httpStatusCode = exceptionCode.getHttpStatusCode();
+        this.reason = exceptionCode.getReason();
+        this.message = null;
+    }
 }

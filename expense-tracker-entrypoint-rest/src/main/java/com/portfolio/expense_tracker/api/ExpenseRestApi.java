@@ -3,7 +3,7 @@ package com.portfolio.expense_tracker.api;
 import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.util.Constants;
+import com.portfolio.expense_tracker.util.ExpenseConstants;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -30,16 +30,16 @@ public interface ExpenseRestApi {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Expense> findById(
-            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id
+            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id
     );
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Expense>> findAll(
-            @RequestParam(required = false, defaultValue = Constants.DEFAULT_OFFSET)
-                @Min(value = 0, message = Constants.OFFSET_INVALID_MSG) Integer offset,
-            @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
-                @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
-                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit
+            @RequestParam(required = false, defaultValue = ExpenseConstants.DEFAULT_OFFSET)
+                @Min(value = 0, message = ExpenseConstants.OFFSET_INVALID_MSG) Integer offset,
+            @RequestParam(required = false, defaultValue = ExpenseConstants.DEFAULT_LIMIT)
+                @Min(value = ExpenseConstants.MIN_LIMIT, message = ExpenseConstants.LIMIT_INVALID_MSG)
+                @Max(value = ExpenseConstants.MAX_LIMIT, message = ExpenseConstants.LIMIT_INVALID_MSG) Integer limit
     );
 
     @PatchMapping(
@@ -48,12 +48,12 @@ public interface ExpenseRestApi {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Expense> update(
-            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id,
+            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id,
             @RequestBody @Valid ExpenseUpdate expenseUpdate
             );
 
     @DeleteMapping(path = "/{id}")
     ResponseEntity<Void> delete(
-            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id
+            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id
     );
 }

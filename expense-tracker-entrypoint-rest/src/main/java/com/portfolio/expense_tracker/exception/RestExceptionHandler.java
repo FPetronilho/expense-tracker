@@ -1,6 +1,6 @@
 package com.portfolio.expense_tracker.exception;
 
-import com.portfolio.expense_tracker.mapper.ExpenseMapperEntryPointRest;
+import com.portfolio.expense_tracker.mapper.ExceptionMapperEntryPointRest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequiredArgsConstructor
 public class RestExceptionHandler {
 
-    private final ExpenseMapperEntryPointRest mapper;
+    private final ExceptionMapperEntryPointRest mapper;
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ExceptionDto> handleBusinessException(BusinessException e) {

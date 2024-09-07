@@ -9,7 +9,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
         componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
-public interface ExpenseMapperEntryPointRest {
+public interface ExceptionMapperEntryPointRest {
 
     ExceptionDto toExceptionDto(BusinessException e);
 }
