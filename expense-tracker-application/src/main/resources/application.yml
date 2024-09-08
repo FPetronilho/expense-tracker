@@ -2,6 +2,7 @@
 spring.application:
   name: expense-tracker
   version: 0.0.1-SNAPSHOT
+  environment: local
 
 server:
   port: 8080
@@ -19,3 +20,8 @@ spring.data.mongodb:
 
 ###################  MongoDB configuration  ###################
 db.populateOnStartUp: true
+
+###################  Authentication and Authorization  ###################
+auth.enabled: true
+auth.jwt.secret: txMcxP6URsgAekXP0PH7wRoy0UnR2v83EwREALR4Zgr6LjCVVbgmcPJbivrJZyDr
+# Jwt Example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiaWF0IjoxNzI1Njk5NjE4LCJpc3MiOiJhdXRoOCIsImF1ZCI6WyJleHBlbnNlLXRyYWNrZXIiXSwic2NvcGUiOiJFWFBFTlNFX0NSRUFURSJ9.YVuXD69pGHatIN20Ut7DeN3v7deVdkz-PZmFulayIol6CbZEmGubg79Ppmhj0RzxQwlDB48Q-2FKgvQf47ysMA

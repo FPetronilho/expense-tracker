@@ -14,7 +14,8 @@ public enum ExceptionCode {
     RESOURCE_NOT_FOUND("E-002", HttpStatus.NOT_FOUND.value(), "Resource not found."),
     RESOURCE_ALREADY_EXISTS("E-003", HttpStatus.CONFLICT.value(), "Resource already exists."),
     CLIENT_NOT_AUTHENTICATED("E-004", HttpStatus.UNAUTHORIZED.value(), "Client not authenticated."),
-    CLIENT_NOT_AUTHORIZED("E-005", HttpStatus.FORBIDDEN.value(), "Client not authorized.");
+    CLIENT_NOT_AUTHORIZED("E-005", HttpStatus.FORBIDDEN.value(), "Client not authorized."),
+    CONFIGURATION_ERROR("E-006", HttpStatus.INTERNAL_SERVER_ERROR.value(), "Configuration error.");
 
     private final String code;
     private final int httpStatusCode;

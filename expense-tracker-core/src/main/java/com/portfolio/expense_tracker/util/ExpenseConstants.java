@@ -1,6 +1,6 @@
 package com.portfolio.expense_tracker.util;
 
-public class Constants {
+public class ExpenseConstants {
 
     // Default values
     public static final String DEFAULT_OFFSET = "0";
