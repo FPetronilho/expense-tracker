@@ -8,6 +8,7 @@ import com.portfolio.expense_tracker.dto.ExpenseUpdate;
 import com.portfolio.expense_tracker.exception.BusinessException;
 import com.portfolio.expense_tracker.exception.ExceptionCode;
 import com.portfolio.expense_tracker.mapper.ExpenseMapperDataProvider;
+import com.portfolio.expense_tracker.usecases.ListByCriteriaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -38,7 +39,7 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     }
 
     @Override
-    public List<Expense> findAll(Integer offset, Integer limit) {
+    public List<Expense> listByCriteria(ListByCriteriaUseCase.Input input) {
         return null;
     }
 

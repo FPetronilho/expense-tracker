@@ -22,7 +22,7 @@ public class ExpenseController implements ExpenseRestApi {
 
     private final CreateUseCase createUseCase;
     private final FindByIdUseCase findByIdUseCase;
-    private final FindAllUseCase findAllUseCase;
+    private final ListByCriteriaUseCase findAllUseCase;
     private final UpdateUseCase updateUseCase;
     private final DeleteUseCase deleteUseCase;
 
@@ -51,12 +51,12 @@ public class ExpenseController implements ExpenseRestApi {
     @Override
     public ResponseEntity<List<Expense>> findAll(Integer offset, Integer limit) {
         log.info("Finding expenses by criteria");
-        FindAllUseCase.Input input = FindAllUseCase.Input.builder()
+        ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)
                 .build();
 
-        FindAllUseCase.Output output = findAllUseCase.execute(input);
+        ListByCriteriaUseCase.Output output = findAllUseCase.execute(input);
         return new ResponseEntity<>(output.getExpenses(), HttpStatus.OK);
     }
 

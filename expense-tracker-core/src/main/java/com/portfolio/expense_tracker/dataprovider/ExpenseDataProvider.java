@@ -3,6 +3,7 @@ package com.portfolio.expense_tracker.dataprovider;
 import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
+import com.portfolio.expense_tracker.usecases.ListByCriteriaUseCase;
 
 import java.util.List;
 
@@ -12,10 +13,7 @@ public interface ExpenseDataProvider {
 
     Expense findById(String id);
 
-    List<Expense> findAll(
-            Integer offset,
-            Integer limit
-    );
+    List<Expense> listByCriteria(ListByCriteriaUseCase.Input input);
 
     Expense update(
             String id,
