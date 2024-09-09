@@ -9,7 +9,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public enum OrderBy {
 
-    COST("cost"),
+    AMOUNT("amount"),
     DATE("date");
 
     private final String value;

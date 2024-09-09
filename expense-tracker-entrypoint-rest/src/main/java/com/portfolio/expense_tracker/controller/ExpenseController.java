@@ -2,9 +2,11 @@ package com.portfolio.expense_tracker.controller;
 
 import com.portfolio.expense_tracker.api.ExpenseRestApi;
 import com.portfolio.expense_tracker.domain.Expense;
+import com.portfolio.expense_tracker.domain.OrderBy;
+import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.usecases.*;
+import com.portfolio.expense_tracker.usecases.expense.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -22,7 +25,7 @@ public class ExpenseController implements ExpenseRestApi {
 
     private final CreateUseCase createUseCase;
     private final FindByIdUseCase findByIdUseCase;
-    private final ListByCriteriaUseCase findAllUseCase;
+    private final ListByCriteriaUseCase listByCriteriaUseCase;
     private final UpdateUseCase updateUseCase;
     private final DeleteUseCase deleteUseCase;
 
@@ -49,20 +52,42 @@ public class ExpenseController implements ExpenseRestApi {
     }
 
     @Override
-    public ResponseEntity<List<Expense>> findAll(Integer offset, Integer limit) {
-        log.info("Finding expenses by criteria");
+    public ResponseEntity<List<Expense>> listByCriteria(
+            Integer offset,
+            Integer limit,
+            String categoryName,
+            LocalDateTime date,
+            LocalDateTime from,
+            LocalDateTime to,
+            Float amount,
+            Float amountGte,
+            Float amountLte,
+            List<OrderBy> orderByList,
+            List<OrderDirection> orderDirectionList
+    ) {
+
         ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)
+                .categoryName(categoryName)
+                .date(date)
+                .from(from)
+                .to(to)
+                .amount(amount)
+                .amountGte(amountGte)
+                .amountLte(amountLte)
+                .orderByList(orderByList)
+                .orderDirectionList(orderDirectionList)
                 .build();
 
-        ListByCriteriaUseCase.Output output = findAllUseCase.execute(input);
+        log.info("Listing expenses by criteria: {}.", input);
+        ListByCriteriaUseCase.Output output = listByCriteriaUseCase.execute(input);
         return new ResponseEntity<>(output.getExpenses(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Expense> update(String id, ExpenseUpdate expenseUpdate) {
-        log.info("Updating expense {}.", id);
+        log.info("Updating expense: {}. Updated expense data: {}.", id, expenseUpdate);
         UpdateUseCase.Input input = UpdateUseCase.Input.builder()
                 .id(id)
                 .expenseUpdate(expenseUpdate)
@@ -74,7 +99,7 @@ public class ExpenseController implements ExpenseRestApi {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        log.info("Deleting expense {}.", id);
+        log.info("Deleting expense: {}.", id);
         DeleteUseCase.Input input = DeleteUseCase.Input.builder()
                 .id(id)
                 .build();

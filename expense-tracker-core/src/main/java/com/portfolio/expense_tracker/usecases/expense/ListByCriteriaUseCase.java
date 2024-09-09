@@ -1,4 +1,4 @@
-package com.portfolio.expense_tracker.usecases;
+package com.portfolio.expense_tracker.usecases.expense;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;
@@ -31,7 +31,7 @@ public class ListByCriteriaUseCase {
     public static class Input {
         private Integer offset;
         private Integer limit;
-        private ExpenseCategory category;
+        private String categoryName;
         private LocalDateTime date;
         private LocalDateTime from;
         private LocalDateTime to;

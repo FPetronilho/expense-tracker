@@ -1,14 +1,15 @@
 package com.portfolio.expense_tracker.dataprovider;
 
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
+import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
 
 import java.util.List;
 
 public interface ExpenseCategoryDataProvider {
 
-    List<ExpenseCategory> findAll();
+    ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate);
 
-    void createAll(List<ExpenseCategory> categories);
+    List<ExpenseCategory> list(Integer offset, Integer limit);
 
-    void deleteAll();
+    void delete(String name);
 }
