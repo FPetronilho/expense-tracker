@@ -110,6 +110,7 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     public void delete(String id) {
         Query query = new Query().addCriteria(Criteria.where("id").is(id));
         DeleteResult deleteResult = mongoTemplate.remove(query, ExpenseDocument.class);
+
         if (deleteResult.getDeletedCount() == 0) {
             throw new BusinessException(
                     ExceptionCode.RESOURCE_NOT_FOUND,

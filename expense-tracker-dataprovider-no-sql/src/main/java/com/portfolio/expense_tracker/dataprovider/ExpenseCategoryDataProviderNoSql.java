@@ -1,9 +1,17 @@
 package com.portfolio.expense_tracker.dataprovider;
 
+import com.mongodb.client.result.DeleteResult;
+import com.portfolio.expense_tracker.document.ExpenseCategoryDocument;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
-import com.portfolio.expense_tracker.mapper.ExpenseMapperDataProvider;
+import com.portfolio.expense_tracker.exception.BusinessException;
+import com.portfolio.expense_tracker.exception.ExceptionCode;
+import com.portfolio.expense_tracker.mapper.ExpenseCategoryMapperDataProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,20 +20,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProvider{
 
-    private final ExpenseMapperDataProvider mapper;
+    private final MongoTemplate mongoTemplate;
+    private final ExpenseCategoryMapperDataProvider mapper;
 
     @Override
     public ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate) {
-        return null;
+        ExpenseCategoryDocument expenseCategoryDocument = mapper.toExpenseCategoryDocument(expenseCategoryCreate);
+        expenseCategoryDocument = mongoTemplate.save(expenseCategoryDocument);
+        return mapper.toExpenseCategory(expenseCategoryDocument);
     }
 
     @Override
     public List<ExpenseCategory> list(Integer offset, Integer limit) {
-        return null;
+        Query query = new Query();
+        query.with(PageRequest.of(offset, limit));
+        List<ExpenseCategoryDocument> expenseCategoryDocuments = mongoTemplate.find(query, ExpenseCategoryDocument.class);
+        return mapper.toExpenseCategoryList(expenseCategoryDocuments);
     }
 
     @Override
     public void delete(String name) {
+        Query query = new Query().addCriteria(Criteria.where("name").is(name));
+        DeleteResult deleteResult = mongoTemplate.remove(query, ExpenseCategoryDocument.class);
 
+        if (deleteResult.getDeletedCount() == 0) {
+            throw new BusinessException(
+                    ExceptionCode.RESOURCE_NOT_FOUND,
+                    String.format("Expense category %s not found.", name)
+            );
+        }
     }
 }

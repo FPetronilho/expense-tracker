@@ -40,13 +40,4 @@ public interface ExpenseMapperDataProvider {
     )
     @Mapping(target = "dbId", ignore = true)
     ExpenseDocument toExpenseDocument(ExpenseCreate expenseCreate);
-
-    ExpenseCategory toExpenseCategory(ExpenseCategoryDocument expenseCategoryDocument);
-
-    List<ExpenseCategory> toExpenseCategoryList(List<ExpenseCategoryDocument> expenseCategoryDocuments);
-
-    @Mapping(target = "dbId", ignore = true)
-    ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategory expenseCategory);
-
-    List<ExpenseCategoryDocument> toExpenseCategoryDocumentList(List<ExpenseCategory> expenseCategories);
 }

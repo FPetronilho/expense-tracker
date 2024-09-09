@@ -34,7 +34,7 @@ public interface ExpenseCategoryRestApi {
                 @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit
     );
 
-    @GetMapping(path = "/{name}")
+    @DeleteMapping(path = "/{name}")
     ResponseEntity<Void> delete(
             @PathVariable
             @Pattern(regexp = Constants.CATEGORY_NAME_REGEX, message = Constants.CATEGORY_NAME_INVALID_MSG) String name
