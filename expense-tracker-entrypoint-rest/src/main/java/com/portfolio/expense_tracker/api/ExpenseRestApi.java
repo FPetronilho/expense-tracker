@@ -1,18 +1,22 @@
 package com.portfolio.expense_tracker.api;
 
 import com.portfolio.expense_tracker.domain.Expense;
+import com.portfolio.expense_tracker.domain.OrderBy;
+import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.util.ExpenseConstants;
+import com.portfolio.expense_tracker.util.Constants;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("api/v1/expenses")
@@ -30,16 +34,43 @@ public interface ExpenseRestApi {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Expense> findById(
-            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id
+            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id
     );
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<Expense>> findAll(
-            @RequestParam(required = false, defaultValue = ExpenseConstants.DEFAULT_OFFSET)
-                @Min(value = 0, message = ExpenseConstants.OFFSET_INVALID_MSG) Integer offset,
-            @RequestParam(required = false, defaultValue = ExpenseConstants.DEFAULT_LIMIT)
-                @Min(value = ExpenseConstants.MIN_LIMIT, message = ExpenseConstants.LIMIT_INVALID_MSG)
-                @Max(value = ExpenseConstants.MAX_LIMIT, message = ExpenseConstants.LIMIT_INVALID_MSG) Integer limit
+    ResponseEntity<List<Expense>> listByCriteria(
+            @RequestParam(required = false, defaultValue = Constants.DEFAULT_OFFSET)
+                @Min(value = 0, message = Constants.OFFSET_INVALID_MSG) Integer offset,
+
+            @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
+                @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
+                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
+
+            @RequestParam(required = false)
+                @Pattern(regexp = Constants.CATEGORY_DESCRIPTION_REGEX,
+                        message = Constants.CATEGORY_DESCRIPTION_INVALID_MSG) String categoryName,
+
+            @RequestParam(required = false)
+                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+
+            @RequestParam(required = false)
+                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+
+            @RequestParam(required = false)
+                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
+
+            @RequestParam(required = false)
+                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_INVALID_MSG) Float amount,
+
+            @RequestParam(required = false)
+                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_GTE_INVALID_MSG) Float amountGte,
+
+            @RequestParam(required = false)
+                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_LTE_INVALID_MSG) Float amountLte,
+
+            @RequestParam(required = false, defaultValue = Constants.DEFAULT_ORDER) List<OrderBy> orderByList,
+
+            @RequestParam(required = false, defaultValue = Constants.DEFAULT_DIRECTION) List<OrderDirection> orderDirectionList
     );
 
     @PatchMapping(
@@ -48,12 +79,12 @@ public interface ExpenseRestApi {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Expense> update(
-            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id,
+            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id,
             @RequestBody @Valid ExpenseUpdate expenseUpdate
-            );
+    );
 
     @DeleteMapping(path = "/{id}")
     ResponseEntity<Void> delete(
-            @PathVariable @Pattern(regexp = ExpenseConstants.ID_REGEX, message = ExpenseConstants.EXPENSE_ID_INVALID_MSG) String id
+            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.EXPENSE_ID_INVALID_MSG) String id
     );
 }

@@ -6,7 +6,7 @@ import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.util.ExpenseConstants;
+import com.portfolio.expense_tracker.util.Constants;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -22,7 +22,7 @@ import java.util.UUID;
 )
 public interface ExpenseMapperDataProvider {
 
-    @Mapping(target = "date", source = ExpenseConstants.CREATED_AT_DB_FIELD)
+    @Mapping(target = "date", source = Constants.CREATED_AT_DB_FIELD)
     Expense toExpense(ExpenseDocument expenseDocument);
 
     List<Expense> toExpenseList(List<ExpenseDocument> expenseDocuments);
