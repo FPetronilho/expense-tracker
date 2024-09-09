@@ -13,7 +13,6 @@ public class Constants {
 
     // Database
     public static final String CREATED_AT_DB_FIELD = "createdAt";
-    public static final String UPDATED_AT_DB_FIELD = "updatedAt";
 
 
     // Required fields validation
