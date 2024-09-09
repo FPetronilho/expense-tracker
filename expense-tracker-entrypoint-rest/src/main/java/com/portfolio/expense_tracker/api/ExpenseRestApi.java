@@ -40,7 +40,7 @@ public interface ExpenseRestApi {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Expense>> listByCriteria(
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_OFFSET)
-                @Min(value = 0, message = Constants.OFFSET_INVALID_MSG) Integer offset,
+                @Min(value = Constants.MIN_OFFSET, message = Constants.OFFSET_INVALID_MSG) Integer offset,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
                 @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
@@ -60,13 +60,13 @@ public interface ExpenseRestApi {
                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
 
             @RequestParam(required = false)
-                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_INVALID_MSG) Float amount,
+                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_INVALID_MSG) Float amount,
 
             @RequestParam(required = false)
-                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_GTE_INVALID_MSG) Float amountGte,
+                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_GTE_INVALID_MSG) Float amountGte,
 
             @RequestParam(required = false)
-                @Min(value = 0, message = Constants.EXPENSE_AMOUNT_LTE_INVALID_MSG) Float amountLte,
+                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_LTE_INVALID_MSG) Float amountLte,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_ORDER) List<OrderBy> orderByList,
 

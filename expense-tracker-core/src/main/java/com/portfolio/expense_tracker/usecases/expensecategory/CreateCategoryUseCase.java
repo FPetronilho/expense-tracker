@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CreateUseCase {
+public class CreateCategoryUseCase {
 
     private final ExpenseCategoryDataProvider dataProvider;
 

@@ -5,8 +5,10 @@ public class Constants {
     // Default values
     public static final String DEFAULT_OFFSET = "0";
     public static final String DEFAULT_LIMIT = "10";
+    public static final int MIN_OFFSET = 0;
     public static final int MIN_LIMIT = 1;
     public static final int MAX_LIMIT = 100;
+    public static final int MIN_AMOUNT = 0;
     public static final String DEFAULT_ORDER = "DATE";
     public static final String DEFAULT_DIRECTION = "ASC";
 

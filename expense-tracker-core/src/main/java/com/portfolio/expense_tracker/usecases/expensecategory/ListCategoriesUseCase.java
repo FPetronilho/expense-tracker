@@ -2,7 +2,6 @@ package com.portfolio.expense_tracker.usecases.expensecategory;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseCategoryDataProvider;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
-import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ListUseCase {
+public class ListCategoriesUseCase {
 
     private final ExpenseCategoryDataProvider dataProvider;
 

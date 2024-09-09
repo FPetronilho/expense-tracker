@@ -22,6 +22,6 @@ public class ExpenseUpdate {
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;
 
-    @Min(value = 0, message = Constants.EXPENSE_AMOUNT_INVALID_MSG)
+    @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_INVALID_MSG)
     private Float amount;
 }

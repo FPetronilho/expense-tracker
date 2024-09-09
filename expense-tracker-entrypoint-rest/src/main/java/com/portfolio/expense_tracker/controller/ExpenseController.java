@@ -80,14 +80,14 @@ public class ExpenseController implements ExpenseRestApi {
                 .orderDirectionList(orderDirectionList)
                 .build();
 
-        log.info("Listing expenses by criteria {}.", input);
+        log.info("Listing expenses by criteria: {}.", input);
         ListByCriteriaUseCase.Output output = listByCriteriaUseCase.execute(input);
         return new ResponseEntity<>(output.getExpenses(), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Expense> update(String id, ExpenseUpdate expenseUpdate) {
-        log.info("Updating expense {}.", id);
+        log.info("Updating expense: {}. Updated expense data: {}.", id, expenseUpdate);
         UpdateUseCase.Input input = UpdateUseCase.Input.builder()
                 .id(id)
                 .expenseUpdate(expenseUpdate)
@@ -99,7 +99,7 @@ public class ExpenseController implements ExpenseRestApi {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        log.info("Deleting expense {}.", id);
+        log.info("Deleting expense: {}.", id);
         DeleteUseCase.Input input = DeleteUseCase.Input.builder()
                 .id(id)
                 .build();

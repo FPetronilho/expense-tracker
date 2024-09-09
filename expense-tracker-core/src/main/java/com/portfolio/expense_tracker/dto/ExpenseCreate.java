@@ -22,6 +22,6 @@ public class ExpenseCreate {
     private String description;
 
     @NotNull(message = Constants.EXPENSE_AMOUNT_MANDATORY_MSG)
-    @Min(value = 0, message = Constants.EXPENSE_AMOUNT_INVALID_MSG)
+    @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_INVALID_MSG)
     private Float amount;
 }
