@@ -2,10 +2,12 @@ package com.portfolio.expense_tracker.dataprovider;
 
 import com.mongodb.client.result.DeleteResult;
 import com.portfolio.expense_tracker.document.ExpenseCategoryDocument;
+import com.portfolio.expense_tracker.document.ExpenseDocument;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
 import com.portfolio.expense_tracker.exception.BusinessException;
 import com.portfolio.expense_tracker.exception.ExceptionCode;
+import com.portfolio.expense_tracker.exception.ResourceNotFoundException;
 import com.portfolio.expense_tracker.mapper.ExpenseCategoryMapperDataProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -44,10 +46,7 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
         DeleteResult deleteResult = mongoTemplate.remove(query, ExpenseCategoryDocument.class);
 
         if (deleteResult.getDeletedCount() == 0) {
-            throw new BusinessException(
-                    ExceptionCode.RESOURCE_NOT_FOUND,
-                    String.format("Expense category %s not found.", name)
-            );
+            throw new ResourceNotFoundException(ExpenseCategoryDocument.class, name);
         }
     }
 }

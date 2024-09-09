@@ -7,8 +7,7 @@ import com.portfolio.expense_tracker.domain.OrderBy;
 import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.exception.BusinessException;
-import com.portfolio.expense_tracker.exception.ExceptionCode;
+import com.portfolio.expense_tracker.exception.ResourceNotFoundException;
 import com.portfolio.expense_tracker.mapper.ExpenseMapperDataProvider;
 import com.portfolio.expense_tracker.usecases.expense.ListByCriteriaUseCase;
 import lombok.RequiredArgsConstructor;
@@ -112,21 +111,16 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         DeleteResult deleteResult = mongoTemplate.remove(query, ExpenseDocument.class);
 
         if (deleteResult.getDeletedCount() == 0) {
-            throw new BusinessException(
-                    ExceptionCode.RESOURCE_NOT_FOUND,
-                    String.format("expense %s not found", id)
-            );
+            throw new ResourceNotFoundException(ExpenseDocument.class, id);
         }
     }
 
     private ExpenseDocument findDocumentById(String id) {
         Query query = new Query().addCriteria(Criteria.where("id").is(id));
         ExpenseDocument expenseDocument = mongoTemplate.findOne(query, ExpenseDocument.class);
+
         expenseDocument = Optional.ofNullable(expenseDocument).orElseThrow(
-                () -> new BusinessException(
-                        ExceptionCode.RESOURCE_NOT_FOUND,
-                        String.format("expense %s not found", id)
-                )
+                () -> new ResourceNotFoundException(ExpenseDocument.class, id)
         );
 
         return expenseDocument;

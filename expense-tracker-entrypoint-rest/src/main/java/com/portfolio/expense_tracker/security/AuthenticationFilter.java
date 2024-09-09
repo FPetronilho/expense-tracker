@@ -116,10 +116,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         } catch (BusinessException e) {
             returnError(e, response);
         } catch (Exception e) {
-            BusinessException businessException = new BusinessException(
-                    ExceptionCode.CLIENT_NOT_AUTHENTICATED,
-                    e.getMessage()
-            );
+            throw new AuthenticationFailedException(e.getMessage());
         }
     }
 
