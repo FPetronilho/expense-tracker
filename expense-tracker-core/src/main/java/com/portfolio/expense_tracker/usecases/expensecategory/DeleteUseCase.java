@@ -1,0 +1,26 @@
+package com.portfolio.expense_tracker.usecases.expensecategory;
+
+import com.portfolio.expense_tracker.dataprovider.ExpenseCategoryDataProvider;
+import com.portfolio.expense_tracker.domain.ExpenseCategory;
+import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
+import lombok.*;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class DeleteUseCase {
+
+    private final ExpenseCategoryDataProvider dataProvider;
+
+    public void execute(Input input) {
+        dataProvider.delete(input.getCategoryName());
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    @Builder
+    public static class Input {
+        private String categoryName;
+    }
+}

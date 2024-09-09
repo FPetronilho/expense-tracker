@@ -1,4 +1,4 @@
-package com.portfolio.expense_tracker.usecases;
+package com.portfolio.expense_tracker.usecases.expense;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;
@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeleteUseCase {
+public class FindByIdUseCase {
 
     private final ExpenseDataProvider dataProvider;
 
-    public void execute(Input input) {
-        dataProvider.delete(input.getId());
+    public Output execute(Input input) {
+        Expense expense = dataProvider.findById(input.getId());
+        return Output.builder()
+                .expense(expense)
+                .build();
     }
 
     @AllArgsConstructor
@@ -22,5 +25,13 @@ public class DeleteUseCase {
     @Builder
     public static class Input {
         private String id;
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    @Builder
+    public static class Output {
+        private Expense expense;
     }
 }

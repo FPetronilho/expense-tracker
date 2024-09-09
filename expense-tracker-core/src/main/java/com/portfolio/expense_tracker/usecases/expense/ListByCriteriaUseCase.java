@@ -1,4 +1,4 @@
-package com.portfolio.expense_tracker.usecases;
+package com.portfolio.expense_tracker.usecases.expense;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;

@@ -6,7 +6,7 @@ import com.portfolio.expense_tracker.domain.OrderBy;
 import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
-import com.portfolio.expense_tracker.usecases.*;
+import com.portfolio.expense_tracker.usecases.expense.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

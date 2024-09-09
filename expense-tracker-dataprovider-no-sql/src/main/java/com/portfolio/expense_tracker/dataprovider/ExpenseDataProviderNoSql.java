@@ -10,7 +10,7 @@ import com.portfolio.expense_tracker.dto.ExpenseUpdate;
 import com.portfolio.expense_tracker.exception.BusinessException;
 import com.portfolio.expense_tracker.exception.ExceptionCode;
 import com.portfolio.expense_tracker.mapper.ExpenseMapperDataProvider;
-import com.portfolio.expense_tracker.usecases.ListByCriteriaUseCase;
+import com.portfolio.expense_tracker.usecases.expense.ListByCriteriaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -18,5 +18,6 @@ public class ExpenseCategoryDocument extends BaseDocument {
 
     @Indexed(unique = true)
     private String name;
+
     private String description;
 }

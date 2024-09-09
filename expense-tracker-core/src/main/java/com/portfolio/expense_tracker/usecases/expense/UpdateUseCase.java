@@ -1,19 +1,24 @@
-package com.portfolio.expense_tracker.usecases;
+package com.portfolio.expense_tracker.usecases.expense;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
+import com.portfolio.expense_tracker.dto.ExpenseUpdate;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CreateUseCase {
+public class UpdateUseCase {
 
     private final ExpenseDataProvider dataProvider;
 
     public Output execute(Input input) {
-        Expense expense = dataProvider.create(input.getExpenseCreate());
+        Expense expense = dataProvider.update(
+                input.getId(),
+                input.getExpenseUpdate()
+        );
+
         return Output.builder()
                 .expense(expense)
                 .build();
@@ -24,7 +29,8 @@ public class CreateUseCase {
     @Data
     @Builder
     public static class Input {
-        private ExpenseCreate expenseCreate;
+        private String id;
+        private ExpenseUpdate expenseUpdate;
     }
 
     @AllArgsConstructor
