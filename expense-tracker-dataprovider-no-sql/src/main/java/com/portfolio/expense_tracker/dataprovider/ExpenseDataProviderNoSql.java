@@ -58,13 +58,13 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
 
         // Date filtering
         if (input.getDate() != null) {
-            query.addCriteria(Criteria.where("date").is(input.getDate()));
+            query.addCriteria(Criteria.where("createdAt").is(input.getDate()));
         } else {
             if (input.getFrom() != null) {
-                query.addCriteria(Criteria.where("date").gte(input.getFrom()));
+                query.addCriteria(Criteria.where("createdAt").gte(input.getFrom()));
             }
             if (input.getTo() != null) {
-                query.addCriteria(Criteria.where("date").lte(input.getTo()));
+                query.addCriteria(Criteria.where("createdAt").lte(input.getTo()));
             }
         }
 
