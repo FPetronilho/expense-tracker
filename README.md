@@ -1,6 +1,6 @@
 # Functional and non functional requirements 
 This project consists on an application that **manages** expenses:
-    • Insert;
+    • Insert; 
     • Consult;
     • Update;
     • Delete.
@@ -28,25 +28,25 @@ The user **must create an account and login** in order to use the application.
 # Requirements by components
 ## 1. Expense Tracker
 Manages expenses:
-    • Insert - **REQ-F-001**;
-    • Consult by ID - **REQ-F-002**;
+    • Insert - **REQ-F-001**; (done)
+    • Consult by ID - **REQ-F-002**; (done)
     • List by criteira - **REQ-F-003**;
-    • Update - **REQ-F-004**;
-    • Delete - **REQ-F-005**.
+    • Update - **REQ-F-004**; (done)
+    • Delete - **REQ-F-005**. (done)
 
 Order expenses:
     • By date - **REQ-F-006**;
-    • By amount - **REQ-F-007**;
+    • By amount - **REQ-F-007**; (done)
 
 Indicate the direction of the ordering for each criteria:
-    • Ascending - **REQ-F-008**;
-    • Descending - **REQ-F-009**;
+    • Ascending - **REQ-F-008**; (done)
+    • Descending - **REQ-F-009**; (done)
 
 The application suggests a list of pre-defined categories - **REQ-F-010**.
 
 The user may manage personalized categories:
-    • Create - **REQ-F-011**;
-    • Delete - **REQ-F-012**;
+    • Create - **REQ-F-011**; (done)
+    • Delete - **REQ-F-012**; (done)
 
 
 ## 2. Auth8 - Auth Infinity (Authorization Server)
