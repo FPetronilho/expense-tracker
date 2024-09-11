@@ -30,7 +30,7 @@ The user **must create an account and login** in order to use the application.
 Manages expenses:
     • Insert - **REQ-F-001**; (done)
     • Consult by ID - **REQ-F-002**; (done)
-    • List by criteira - **REQ-F-003**;
+    • List by criteira - **REQ-F-003**; (only criteria left to implement is by date)
     • Update - **REQ-F-004**; (done)
     • Delete - **REQ-F-005**. (done)
 
