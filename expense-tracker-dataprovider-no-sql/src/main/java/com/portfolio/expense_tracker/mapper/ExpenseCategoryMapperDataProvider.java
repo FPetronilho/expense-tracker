@@ -21,4 +21,7 @@ public interface ExpenseCategoryMapperDataProvider {
 
     @Mapping(target = "dbId", ignore = true)
     ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategoryCreate expenseCategoryCreate);
+
+    @Mapping(target = "dbId", ignore = true)
+    ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategory expenseCategory);
 }

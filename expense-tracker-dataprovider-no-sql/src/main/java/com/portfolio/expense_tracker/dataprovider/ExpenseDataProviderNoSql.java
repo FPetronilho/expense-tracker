@@ -3,11 +3,13 @@ package com.portfolio.expense_tracker.dataprovider;
 import com.mongodb.client.result.DeleteResult;
 import com.portfolio.expense_tracker.document.ExpenseDocument;
 import com.portfolio.expense_tracker.domain.Expense;
+import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.domain.OrderBy;
 import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
 import com.portfolio.expense_tracker.exception.ResourceNotFoundException;
+import com.portfolio.expense_tracker.mapper.ExpenseCategoryMapperDataProvider;
 import com.portfolio.expense_tracker.mapper.ExpenseMapperDataProvider;
 import com.portfolio.expense_tracker.usecases.expense.ListByCriteriaUseCase;
 import lombok.RequiredArgsConstructor;
@@ -26,19 +28,21 @@ import java.util.Optional;
 public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
 
     private final MongoTemplate mongoTemplate;
-    private final ExpenseMapperDataProvider mapper;
+    private final ExpenseMapperDataProvider expenseMapper;
+    private final ExpenseCategoryMapperDataProvider expenseCategoryMapper;
 
     @Override
-    public Expense create(ExpenseCreate expenseCreate) {
-        ExpenseDocument expenseDocument = mapper.toExpenseDocument(expenseCreate);
+    public Expense create(ExpenseCreate expenseCreate, ExpenseCategory expenseCategory) {
+        ExpenseDocument expenseDocument = expenseMapper.toExpenseDocument(expenseCreate);
+        expenseDocument.setCategory(expenseCategoryMapper.toExpenseCategoryDocument(expenseCategory));
         expenseDocument = mongoTemplate.save(expenseDocument);
-        return mapper.toExpense(expenseDocument);
+        return expenseMapper.toExpense(expenseDocument);
     }
 
     @Override
     public Expense findById(String id) {
         ExpenseDocument expenseDocument = findDocumentById(id);
-        return mapper.toExpense(expenseDocument);
+        return expenseMapper.toExpense(expenseDocument);
     }
 
     @Override
@@ -100,9 +104,9 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     @Override
     public Expense update(String id, ExpenseUpdate expenseUpdate) {
         ExpenseDocument expenseDocument = findDocumentById(id);
-        mapper.updateExpenseDocument(expenseDocument, expenseUpdate);
+        expenseMapper.updateExpenseDocument(expenseDocument, expenseUpdate);
         expenseDocument = mongoTemplate.save(expenseDocument);
-        return mapper.toExpense(expenseDocument);
+        return expenseMapper.toExpense(expenseDocument);
     }
 
     @Override

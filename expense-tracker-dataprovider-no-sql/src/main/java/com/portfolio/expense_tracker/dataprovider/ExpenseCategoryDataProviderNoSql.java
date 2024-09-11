@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
 
     @Override
     public ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate) {
-        if (findByName(expenseCategoryCreate.getName())) {
+        if (existsByName(expenseCategoryCreate.getName())) {
             throw new ResourceAlreadyExistsException(ExpenseCategoryDocument.class, expenseCategoryCreate.getName());
         }
 
@@ -55,8 +56,21 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
         }
     }
 
-    private boolean findByName(String name) {
+    @Override
+    public boolean existsByName(String name) {
         Query query = new Query().addCriteria(Criteria.where("name").is(name));
         return mongoTemplate.exists(query, ExpenseCategoryDocument.class);
+    }
+
+    @Override
+    public ExpenseCategory findByName(String name) {
+        Query query = new Query().addCriteria(Criteria.where("name").is(name));
+        ExpenseCategoryDocument expenseCategoryDocument = mongoTemplate.findOne(query, ExpenseCategoryDocument.class);
+
+        expenseCategoryDocument = Optional.ofNullable(expenseCategoryDocument).orElseThrow(
+                () -> new ResourceNotFoundException(ExpenseCategoryDocument.class, name)
+        );
+
+        return mapper.toExpenseCategory(expenseCategoryDocument);
     }
 }
