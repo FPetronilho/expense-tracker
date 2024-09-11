@@ -13,7 +13,5 @@ public interface ExpenseCategoryDataProvider {
 
     void delete(String name);
 
-    boolean existsByName(String name);
-
     ExpenseCategory findByName(String name);
 }
