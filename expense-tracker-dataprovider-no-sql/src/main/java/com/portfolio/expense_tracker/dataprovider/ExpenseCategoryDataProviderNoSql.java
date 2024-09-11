@@ -2,11 +2,8 @@ package com.portfolio.expense_tracker.dataprovider;
 
 import com.mongodb.client.result.DeleteResult;
 import com.portfolio.expense_tracker.document.ExpenseCategoryDocument;
-import com.portfolio.expense_tracker.document.ExpenseDocument;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCategoryCreate;
-import com.portfolio.expense_tracker.exception.BusinessException;
-import com.portfolio.expense_tracker.exception.ExceptionCode;
 import com.portfolio.expense_tracker.exception.ResourceAlreadyExistsException;
 import com.portfolio.expense_tracker.exception.ResourceNotFoundException;
 import com.portfolio.expense_tracker.mapper.ExpenseCategoryMapperDataProvider;

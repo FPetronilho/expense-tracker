@@ -2,7 +2,6 @@ package com.portfolio.expense_tracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.portfolio.expense_tracker.util.Constants;
-import com.portfolio.expense_tracker.validation.ValidExpenseCategory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
