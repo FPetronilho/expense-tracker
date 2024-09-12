@@ -98,7 +98,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         }
 
         // Execute the query and return results
-        return mongoTemplate.find(query, Expense.class);
+        List<ExpenseDocument> list = mongoTemplate.find(query, ExpenseDocument.class);
+        return expenseMapper.toExpenseList(list);
     }
 
     @Override
