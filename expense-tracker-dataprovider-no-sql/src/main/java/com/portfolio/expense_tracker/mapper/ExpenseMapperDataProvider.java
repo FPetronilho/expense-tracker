@@ -19,6 +19,7 @@ import java.util.UUID;
 )
 public interface ExpenseMapperDataProvider {
 
+    @Mapping(target = "date", source = "createdAt")
     Expense toExpense(ExpenseDocument expenseDocument);
 
     List<Expense> toExpenseList(List<ExpenseDocument> expenseDocuments);

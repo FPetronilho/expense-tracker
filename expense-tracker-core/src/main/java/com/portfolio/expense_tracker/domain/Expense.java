@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,4 +19,5 @@ public class Expense {
     private ExpenseCategory category;
     private String description;
     private Float amount;
+    private LocalDateTime date;
 }
