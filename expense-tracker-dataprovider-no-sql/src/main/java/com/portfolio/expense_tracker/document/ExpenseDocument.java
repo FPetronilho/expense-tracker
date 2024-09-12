@@ -24,4 +24,5 @@ public class ExpenseDocument extends BaseDocument {
     private ExpenseCategoryDocument category;
     private String description;
     private Float amount;
+    private LocalDateTime date;
 }
