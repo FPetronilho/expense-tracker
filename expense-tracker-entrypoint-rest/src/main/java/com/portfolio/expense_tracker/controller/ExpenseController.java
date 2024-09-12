@@ -6,6 +6,7 @@ import com.portfolio.expense_tracker.domain.OrderBy;
 import com.portfolio.expense_tracker.domain.OrderDirection;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
+import com.portfolio.expense_tracker.exception.ParameterValidationFailedException;
 import com.portfolio.expense_tracker.usecases.expense.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,48 @@ public class ExpenseController implements ExpenseRestApi {
             List<OrderDirection> orderDirectionList
     ) {
 
+        // Input treatment
+        if (amount != null) {
+            amountGte = null;
+            amountLte = null;
+        }
+
+        if (amountGte != null || amountLte != null) {
+            amount = null;
+        }
+
+        if (date != null) {
+            from = null;
+            to = null;
+        }
+
+        if (to != null || from != null) {
+            date = null;
+        }
+
+        // Input validation
+        if (amountGte != null && amountLte != null && amountLte < amountGte) {
+            throw new ParameterValidationFailedException(
+                    "Invalid amount input: 'amountLte' must be grater than or equal to 'amountGte'."
+            );
+        }
+
+        if (to != null && from != null && to.isBefore(from)) {
+            throw new ParameterValidationFailedException(
+                    "Invalid date input: 'to' must be later than 'from'."
+            );
+        }
+
+        if (orderByList.size() != orderDirectionList.size()) {
+            throw new ParameterValidationFailedException(
+                    String.format("Invalid 'orderBy' and 'orderDirection' pair. " +
+                                    "'orderBy' size is %s and 'orderDirection' size is %s. Both sizes must match.",
+                            orderByList.size(),
+                            orderDirectionList.size())
+            );
+        }
+
+        // Method logic
         ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)

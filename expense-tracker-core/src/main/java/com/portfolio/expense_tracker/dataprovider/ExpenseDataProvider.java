@@ -1,6 +1,7 @@
 package com.portfolio.expense_tracker.dataprovider;
 
 import com.portfolio.expense_tracker.domain.Expense;
+import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
 import com.portfolio.expense_tracker.dto.ExpenseUpdate;
 import com.portfolio.expense_tracker.usecases.expense.ListByCriteriaUseCase;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface ExpenseDataProvider {
 
-    Expense create(ExpenseCreate expenseCreate);
+    Expense create(ExpenseCreate expenseCreate, ExpenseCategory expenseCategory);
 
     Expense findById(String id);
 

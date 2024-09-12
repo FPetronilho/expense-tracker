@@ -12,4 +12,6 @@ public interface ExpenseCategoryDataProvider {
     List<ExpenseCategory> list(Integer offset, Integer limit);
 
     void delete(String name);
+
+    ExpenseCategory findByName(String name);
 }

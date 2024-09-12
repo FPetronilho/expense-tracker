@@ -23,8 +23,10 @@ public abstract class BaseDocument {
     private ObjectId dbId;
 
     @CreatedDate
+    @Field("created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Field("updated_at")
     private LocalDateTime updatedAt;
 }
