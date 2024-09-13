@@ -3,7 +3,6 @@ package com.portfolio.expense_tracker.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.portfolio.expense_tracker.exception.AuthenticationFailedException;
 import com.portfolio.expense_tracker.exception.BusinessException;
-import com.portfolio.expense_tracker.exception.ExceptionCode;
 import com.portfolio.expense_tracker.exception.ExceptionDto;
 import com.portfolio.expense_tracker.mapper.ExceptionMapperEntryPointRest;
 import com.portfolio.expense_tracker.util.AuthenticationConstants;
@@ -116,10 +115,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         } catch (BusinessException e) {
             returnError(e, response);
         } catch (Exception e) {
-            BusinessException businessException = new BusinessException(
-                    ExceptionCode.CLIENT_NOT_AUTHENTICATED,
-                    e.getMessage()
-            );
+            throw new AuthenticationFailedException(e.getMessage());
         }
     }
 

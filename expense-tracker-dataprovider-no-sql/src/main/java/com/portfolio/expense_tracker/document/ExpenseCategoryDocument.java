@@ -16,8 +16,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "expense-category")
 public class ExpenseCategoryDocument extends BaseDocument {
 
-    @Indexed(unique = true)
     private String name;
-
     private String description;
 }

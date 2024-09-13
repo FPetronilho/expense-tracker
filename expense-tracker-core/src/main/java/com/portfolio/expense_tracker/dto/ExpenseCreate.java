@@ -1,7 +1,6 @@
 package com.portfolio.expense_tracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.util.Constants;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,8 @@ import lombok.*;
 public class ExpenseCreate {
 
     @NotNull(message = Constants.EXPENSE_CATEGORY_MANDATORY_MSG)
-    private ExpenseCategory category;
+    @Pattern(regexp = Constants.CATEGORY_NAME_REGEX, message = Constants.CATEGORY_NAME_INVALID_MSG)
+    private String expenseCategoryName;
 
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;

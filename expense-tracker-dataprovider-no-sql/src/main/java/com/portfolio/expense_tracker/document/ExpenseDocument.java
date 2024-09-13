@@ -8,6 +8,8 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,4 +24,5 @@ public class ExpenseDocument extends BaseDocument {
     private ExpenseCategoryDocument category;
     private String description;
     private Float amount;
+    private LocalDateTime date;
 }

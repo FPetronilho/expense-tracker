@@ -26,11 +26,8 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDto> handleGlobalException(Exception e) {
-        BusinessException businessException = new BusinessException(
-                ExceptionCode.INTERNAL_SERVER_ERROR,
-                e.getMessage()
+        return handleBusinessException(
+                new InternalServerErrorException(e.getMessage())
         );
-
-        return handleBusinessException(businessException);
     }
 }

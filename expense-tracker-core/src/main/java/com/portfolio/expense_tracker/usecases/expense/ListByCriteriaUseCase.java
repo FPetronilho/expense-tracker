@@ -2,7 +2,6 @@ package com.portfolio.expense_tracker.usecases.expense;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;
-import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.domain.OrderBy;
 import com.portfolio.expense_tracker.domain.OrderDirection;
 import lombok.*;

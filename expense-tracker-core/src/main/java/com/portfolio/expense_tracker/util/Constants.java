@@ -37,6 +37,7 @@ public class Constants {
     public static final String EXPENSE_AMOUNT_LTE_INVALID_MSG = "'amountLte' must be positive.";
     public static final String EXPENSE_DESCRIPTION_INVALID_MSG = "'description' must match: " + EXPENSE_DESCRIPTION_REGEX + ".";
     public static final String EXPENSE_ID_INVALID_MSG = "'id' must match: " + ID_REGEX + ".";
+    public static final String EXPENSE_CATEGORY_VALIDATOR_MSG = "Either 'expenseCategoryName' or new 'ExpenseCategory' must be provided.";
     public static final String OFFSET_INVALID_MSG = "'offset' must be positive";
     public static final String LIMIT_INVALID_MSG = "'limit' must be in the range [" + MIN_LIMIT + ", " + MAX_LIMIT + "]";
     public static final String CATEGORY_NAME_INVALID_MSG = "'name' must match: " + CATEGORY_NAME_REGEX + ".";
