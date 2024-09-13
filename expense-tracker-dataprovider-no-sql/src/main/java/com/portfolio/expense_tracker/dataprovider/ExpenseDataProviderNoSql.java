@@ -32,9 +32,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     private final ExpenseCategoryMapperDataProvider expenseCategoryMapper;
 
     @Override
-    public Expense create(ExpenseCreate expenseCreate, ExpenseCategory expenseCategory) {
+    public Expense create(ExpenseCreate expenseCreate) {
         ExpenseDocument expenseDocument = expenseMapper.toExpenseDocument(expenseCreate);
-        expenseDocument.setCategory(expenseCategoryMapper.toExpenseCategoryDocument(expenseCategory));
         expenseDocument = mongoTemplate.save(expenseDocument);
         return expenseMapper.toExpense(expenseDocument);
     }

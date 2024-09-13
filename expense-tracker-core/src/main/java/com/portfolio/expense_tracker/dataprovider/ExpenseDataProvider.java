@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ExpenseDataProvider {
 
-    Expense create(ExpenseCreate expenseCreate, ExpenseCategory expenseCategory);
+    Expense create(ExpenseCreate expenseCreate);
 
     Expense findById(String id);
 
