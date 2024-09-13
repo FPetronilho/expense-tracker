@@ -93,12 +93,14 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
                         input.getOrderDirectionList().size() > i) ? input.getOrderDirectionList().get(i) : OrderDirection.ASC;
 
                 Sort.Direction sortDirection = (direction == OrderDirection.DESC) ? Sort.Direction.DESC : Sort.Direction.ASC;
-                query.with(Sort.by(sortDirection, orderBy.getValue()));
+                String sortField = orderBy == OrderBy.DATE ? "createdAt" : orderBy.getValue();
+                query.with(Sort.by(sortDirection, sortField));
             }
         }
 
         // Execute the query and return results
-        return mongoTemplate.find(query, Expense.class);
+        List<ExpenseDocument> list = mongoTemplate.find(query, ExpenseDocument.class);
+        return expenseMapper.toExpenseList(list);
     }
 
     @Override
