@@ -5,9 +5,6 @@ import com.portfolio.expense_tracker.dataprovider.ExpenseDataProvider;
 import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
 import com.portfolio.expense_tracker.dto.ExpenseCreate;
-import com.portfolio.expense_tracker.exception.ParameterValidationFailedException;
-import com.portfolio.expense_tracker.exception.ResourceNotFoundException;
-import com.portfolio.expense_tracker.util.Constants;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +19,7 @@ public class CreateUseCase {
         ExpenseCreate expenseCreate = input.getExpenseCreate();
         ExpenseCategory expenseCategory = findExpenseCategory(expenseCreate);
 
-        Expense expense = expenseDataProvider.create(expenseCreate);
+        Expense expense = expenseDataProvider.create(expenseCreate, expenseCategory);
         return Output.builder()
                 .expense(expense)
                 .build();
