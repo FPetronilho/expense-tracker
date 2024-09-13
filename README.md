@@ -30,12 +30,12 @@ The user **must create an account and login** in order to use the application.
 Manages expenses:
     • Insert - **REQ-F-001**; (done)
     • Consult by ID - **REQ-F-002**; (done)
-    • List by criteira - **REQ-F-003**; (only criteria left to implement is by date)
+    • List by criteira - **REQ-F-003**; (done)
     • Update - **REQ-F-004**; (done)
     • Delete - **REQ-F-005**. (done)
 
 Order expenses:
-    • By date - **REQ-F-006**;
+    • By date - **REQ-F-006**; (done)
     • By amount - **REQ-F-007**; (done)
 
 Indicate the direction of the ordering for each criteria:
