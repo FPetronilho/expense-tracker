@@ -1,6 +1,7 @@
 package com.portfolio.expense_tracker.mapper;
 
 import com.portfolio.expense_tracker.dataprovider.ExpenseCategoryDataProvider;
+import com.portfolio.expense_tracker.document.ExpenseCategoryDocument;
 import com.portfolio.expense_tracker.document.ExpenseDocument;
 import com.portfolio.expense_tracker.domain.Expense;
 import com.portfolio.expense_tracker.domain.ExpenseCategory;
@@ -39,6 +40,9 @@ public interface ExpenseMapperDataProvider {
     ) {
         return categoryName != null ? expenseCategoryDataProvider.findByName(categoryName) : null;
     }
+
+    @Mapping(target = "dbId", ignore = true)
+    ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategory expenseCategory);
 
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "dbId", ignore = true)
