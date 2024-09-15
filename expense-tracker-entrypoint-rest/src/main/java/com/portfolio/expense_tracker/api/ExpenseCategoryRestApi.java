@@ -31,7 +31,9 @@ public interface ExpenseCategoryRestApi {
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
                 @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
-                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit
+                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
+
+            @RequestParam(required = false) List<String> ids
     );
 
     @DeleteMapping(path = "/{name}")

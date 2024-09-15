@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UpdateUseCase {
 
-    private final ExpenseDataProvider dataProvider;
+    private final ExpenseDataProvider expenseDataProvider;
 
     public Output execute(Input input) {
-        Expense expense = dataProvider.update(
+       Expense expense = expenseDataProvider.update(
                 input.getId(),
                 input.getExpenseUpdate()
         );

@@ -39,6 +39,7 @@ public class ListByCriteriaUseCase {
         private Float amountGte;
         private List<OrderBy> orderByList;
         private List<OrderDirection> orderDirectionList;
+        private List<String> ids;
     }
 
     @AllArgsConstructor

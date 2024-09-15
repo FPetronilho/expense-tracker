@@ -70,7 +70,9 @@ public interface ExpenseRestApi {
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_ORDER) List<OrderBy> orderByList,
 
-            @RequestParam(required = false, defaultValue = Constants.DEFAULT_DIRECTION) List<OrderDirection> orderDirectionList
+            @RequestParam(required = false, defaultValue = Constants.DEFAULT_DIRECTION) List<OrderDirection> orderDirectionList,
+
+            @RequestParam(required = false) List<String> ids
     );
 
     @PatchMapping(

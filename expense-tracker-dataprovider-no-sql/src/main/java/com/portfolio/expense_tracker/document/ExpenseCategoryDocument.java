@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "expense-category")
 public class ExpenseCategoryDocument extends BaseDocument {
 
+    @Indexed(unique = true)
+    private String id;
+
     private String name;
     private String description;
+    private boolean isDefault;
 }

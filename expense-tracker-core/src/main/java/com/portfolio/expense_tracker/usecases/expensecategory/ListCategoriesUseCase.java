@@ -31,6 +31,7 @@ public class ListCategoriesUseCase {
     public static class Input {
         private Integer offset;
         private Integer limit;
+        private List<String> ids;
     }
 
     @AllArgsConstructor

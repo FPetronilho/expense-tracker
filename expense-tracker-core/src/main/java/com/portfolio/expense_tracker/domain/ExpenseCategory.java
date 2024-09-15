@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExpenseCategory {
 
+    private String id;
     private String name;
     private String description;
+    private boolean isDefault;
 }
