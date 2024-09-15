@@ -42,7 +42,7 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
             List<String> ids
     ) {
 
-        log.info("Listing expenses.");
+        log.info("Listing expenses: (offset={}, limit={}, ids={})", offset, limit, ids);
         ids = Collections.emptyList();
 
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
