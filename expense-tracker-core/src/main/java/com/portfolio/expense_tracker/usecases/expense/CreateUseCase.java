@@ -26,7 +26,7 @@ public class CreateUseCase {
     }
 
     private ExpenseCategory findExpenseCategory(ExpenseCreate expenseCreate) {
-        return expenseCategoryDataProvider.findByName(expenseCreate.getExpenseCategoryName());
+        return expenseCategoryDataProvider.findByName(expenseCreate.getCategoryName());
     }
 
     @AllArgsConstructor

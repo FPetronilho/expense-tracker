@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -35,8 +36,15 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     }
 
     @Override
-    public ResponseEntity<List<ExpenseCategory>> list(Integer offset, Integer limit) {
+    public ResponseEntity<List<ExpenseCategory>> list(
+            Integer offset,
+            Integer limit,
+            List<String> ids
+    ) {
+
         log.info("Listing expenses.");
+        ids = Collections.emptyList();
+
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)

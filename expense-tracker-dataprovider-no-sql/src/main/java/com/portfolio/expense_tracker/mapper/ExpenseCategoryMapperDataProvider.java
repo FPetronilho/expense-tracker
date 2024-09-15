@@ -19,6 +19,7 @@ public interface ExpenseCategoryMapperDataProvider {
 
     List<ExpenseCategory> toExpenseCategoryList(List<ExpenseCategoryDocument> expenseCategoryDocumentList);
 
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "dbId", ignore = true)
     ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategoryCreate expenseCategoryCreate);
 

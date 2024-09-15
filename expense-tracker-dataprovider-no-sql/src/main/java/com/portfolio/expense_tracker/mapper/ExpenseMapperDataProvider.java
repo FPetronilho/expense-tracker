@@ -31,10 +31,7 @@ public interface ExpenseMapperDataProvider {
             ExpenseUpdate expenseUpdate
     );
 
-    @Mapping(
-            target = "id",
-            expression = "java(java.util.UUID.randomUUID().toString())"
-    )
+    @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "dbId", ignore = true)
     ExpenseDocument toExpenseDocument(ExpenseCreate expenseCreate);
 }

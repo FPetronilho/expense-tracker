@@ -16,7 +16,7 @@ public class ExpenseCreate {
 
     @NotNull(message = Constants.EXPENSE_CATEGORY_MANDATORY_MSG)
     @Pattern(regexp = Constants.CATEGORY_NAME_REGEX, message = Constants.CATEGORY_NAME_INVALID_MSG)
-    private String expenseCategoryName;
+    private String categoryName;
 
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;

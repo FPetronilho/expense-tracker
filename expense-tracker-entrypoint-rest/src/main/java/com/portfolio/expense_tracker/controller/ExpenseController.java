@@ -12,10 +12,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -64,10 +66,13 @@ public class ExpenseController implements ExpenseRestApi {
             Float amountGte,
             Float amountLte,
             List<OrderBy> orderByList,
-            List<OrderDirection> orderDirectionList
+            List<OrderDirection> orderDirectionList,
+            List<String> ids
     ) {
 
         // Input treatment
+        ids = Collections.emptyList();
+
         if (amount != null) {
             amountGte = null;
             amountLte = null;
