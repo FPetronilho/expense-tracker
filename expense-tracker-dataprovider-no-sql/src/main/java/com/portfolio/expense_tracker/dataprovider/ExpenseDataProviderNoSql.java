@@ -30,6 +30,7 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     private final MongoTemplate mongoTemplate;
     private final ExpenseMapperDataProvider expenseMapper;
     private final ExpenseCategoryMapperDataProvider expenseCategoryMapper;
+    private final ExpenseCategoryDataProvider expenseCategoryDataProvider;
 
     @Override
     public Expense create(ExpenseCreate expenseCreate, ExpenseCategory expenseCategory) {
@@ -106,7 +107,7 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
     @Override
     public Expense update(String id, ExpenseUpdate expenseUpdate) {
         ExpenseDocument expenseDocument = findDocumentById(id);
-        expenseMapper.updateExpenseDocument(expenseDocument, expenseUpdate);
+        expenseMapper.updateExpenseDocument(expenseDocument, expenseUpdate, expenseCategoryDataProvider);
         expenseDocument = mongoTemplate.save(expenseDocument);
         return expenseMapper.toExpense(expenseDocument);
     }
