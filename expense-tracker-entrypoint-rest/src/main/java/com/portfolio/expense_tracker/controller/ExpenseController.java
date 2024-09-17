@@ -70,8 +70,6 @@ public class ExpenseController implements ExpenseRestApi {
     ) {
 
         // Input treatment
-        ids = Collections.emptyList();
-
         if (amount != null) {
             amountGte = null;
             amountLte = null;
@@ -125,6 +123,7 @@ public class ExpenseController implements ExpenseRestApi {
                 .amountLte(amountLte)
                 .orderByList(orderByList)
                 .orderDirectionList(orderDirectionList)
+                .ids(ids)
                 .build();
 
         log.info("Listing expenses by criteria: {}.", input);

@@ -46,6 +46,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         return expenseMapper.toExpense(expenseDocument);
     }
 
+    //TODO: Change query to allow list by List<String> ids
+    // Tip: Use query.in
     @Override
     public List<Expense> listByCriteria(ListByCriteriaUseCase.Input input) {
         Query query = new Query();
