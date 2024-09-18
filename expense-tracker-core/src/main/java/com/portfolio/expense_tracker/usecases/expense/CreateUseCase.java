@@ -17,7 +17,7 @@ public class CreateUseCase {
 
     public Output execute(Input input) {
         ExpenseCreate expenseCreate = input.getExpenseCreate();
-        ExpenseCategory expenseCategory = findExpenseCategoryByName(expenseCreate);
+        ExpenseCategory expenseCategory = findExpenseCategoryById(expenseCreate);
 
         Expense expense = expenseDataProvider.create(expenseCreate, expenseCategory);
         return Output.builder()
@@ -25,9 +25,8 @@ public class CreateUseCase {
                 .build();
     }
 
-    //TODO: change findByName to findById
-    private ExpenseCategory findExpenseCategoryByName(ExpenseCreate expenseCreate) {
-        return expenseCategoryDataProvider.findByName(expenseCreate.getCategoryName());
+   private ExpenseCategory findExpenseCategoryById(ExpenseCreate expenseCreate) {
+        return expenseCategoryDataProvider.findById(expenseCreate.getCategoryId());
     }
 
     @AllArgsConstructor

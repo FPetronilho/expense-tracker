@@ -30,7 +30,7 @@ public class ListByCriteriaUseCase {
     public static class Input {
         private Integer offset;
         private Integer limit;
-        private String categoryName;
+        private String categoryId;
         private LocalDateTime date;
         private LocalDateTime from;
         private LocalDateTime to;

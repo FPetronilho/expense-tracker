@@ -48,7 +48,7 @@ public interface ExpenseRestApi {
 
             @RequestParam(required = false)
                 @Pattern(regexp = Constants.CATEGORY_NAME_REGEX,
-                        message = Constants.CATEGORY_NAME_INVALID_MSG) String categoryName,
+                        message = Constants.CATEGORY_NAME_INVALID_MSG) String categoryId,
 
             @RequestParam(required = false)
                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,

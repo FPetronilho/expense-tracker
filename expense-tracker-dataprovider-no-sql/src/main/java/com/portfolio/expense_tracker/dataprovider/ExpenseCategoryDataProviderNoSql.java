@@ -35,8 +35,9 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
         return mapper.toExpenseCategory(expenseCategoryDocument);
     }
 
+    // TODO: Make List ids work
     @Override
-    public List<ExpenseCategory> list(Integer offset, Integer limit) {
+    public List<ExpenseCategory> list(Integer offset, Integer limit, List<String> ids) {
         Query query = new Query();
         query.with(PageRequest.of(offset, limit));
         List<ExpenseCategoryDocument> expenseCategoryDocuments = mongoTemplate.find(query, ExpenseCategoryDocument.class);
@@ -44,22 +45,22 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
     }
 
     @Override
-    public void delete(String name) {
-        Query query = new Query().addCriteria(Criteria.where("name").is(name));
+    public void delete(String id) {
+        Query query = new Query().addCriteria(Criteria.where("id").is(id));
         DeleteResult deleteResult = mongoTemplate.remove(query, ExpenseCategoryDocument.class);
 
         if (deleteResult.getDeletedCount() == 0) {
-            throw new ResourceNotFoundException(ExpenseCategoryDocument.class, name);
+            throw new ResourceNotFoundException(ExpenseCategoryDocument.class, id);
         }
     }
 
     @Override
-    public ExpenseCategory findByName(String name) {
-        Query query = new Query().addCriteria(Criteria.where("name").is(name));
+    public ExpenseCategory findById(String id) {
+        Query query = new Query().addCriteria(Criteria.where("id").is(id));
         ExpenseCategoryDocument expenseCategoryDocument = mongoTemplate.findOne(query, ExpenseCategoryDocument.class);
 
         expenseCategoryDocument = Optional.ofNullable(expenseCategoryDocument).orElseThrow(
-                () -> new ResourceNotFoundException(ExpenseCategoryDocument.class, name)
+                () -> new ResourceNotFoundException(ExpenseCategoryDocument.class, id)
         );
 
         return mapper.toExpenseCategory(expenseCategoryDocument);

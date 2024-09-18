@@ -59,8 +59,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         ));
 
         // Filtering by category if provided
-        if (input.getCategoryName() != null) {
-            query.addCriteria(Criteria.where("category.name").is(input.getCategoryName()));
+        if (input.getCategoryId() != null) {
+            query.addCriteria(Criteria.where("category.name").is(input.getCategoryId()));
         }
 
         // Date filtering

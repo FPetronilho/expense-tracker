@@ -26,19 +26,19 @@ public interface ExpenseMapperDataProvider {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dbId", ignore = true)
-    @Mapping(target = "category", source = "categoryName", qualifiedByName = "resolveCategoryName")
+    @Mapping(target = "category", source = "categoryId", qualifiedByName = "resolveCategoryId")
     void updateExpenseDocument(
             @MappingTarget ExpenseDocument expenseDocument,
             ExpenseUpdate expenseUpdate,
             @Context ExpenseCategoryDataProvider expenseCategoryDataProvider
     );
 
-    @Named("resolveCategoryName")
-    default ExpenseCategory resolveCategoryName(
-            String categoryName,
+    @Named("resolveCategoryId")
+    default ExpenseCategory resolveCategoryId(
+            String categoryId,
             @Context ExpenseCategoryDataProvider expenseCategoryDataProvider
     ) {
-        return categoryName != null ? expenseCategoryDataProvider.findByName(categoryName) : null;
+        return categoryId != null ? expenseCategoryDataProvider.findById(categoryId) : null;
     }
 
     @Mapping(target = "dbId", ignore = true)

@@ -14,10 +14,9 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExpenseCreate {
 
-    //TODO: change categoryName to categoryId
-    @NotNull(message = Constants.EXPENSE_CATEGORY_MANDATORY_MSG)
-    @Pattern(regexp = Constants.CATEGORY_NAME_REGEX, message = Constants.CATEGORY_NAME_INVALID_MSG)
-    private String categoryName;
+    @NotNull(message = Constants.EXPENSE_CATEGORY_ID_MANDATORY_MSG)
+    @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG)
+    private String categoryId;
 
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;

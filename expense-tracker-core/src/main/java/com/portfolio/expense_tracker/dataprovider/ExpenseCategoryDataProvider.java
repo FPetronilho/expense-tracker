@@ -9,9 +9,9 @@ public interface ExpenseCategoryDataProvider {
 
     ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate);
 
-    List<ExpenseCategory> list(Integer offset, Integer limit);
+    List<ExpenseCategory> list(Integer offset, Integer limit, List<String> ids);
 
-    void delete(String name);
+    void delete(String id);
 
-    ExpenseCategory findByName(String name);
+    ExpenseCategory findById(String id);
 }

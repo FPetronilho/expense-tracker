@@ -16,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -57,7 +56,7 @@ public class ExpenseController implements ExpenseRestApi {
     public ResponseEntity<List<Expense>> listByCriteria(
             Integer offset,
             Integer limit,
-            String categoryName,
+            String categoryId,
             LocalDateTime date,
             LocalDateTime from,
             LocalDateTime to,
@@ -114,7 +113,7 @@ public class ExpenseController implements ExpenseRestApi {
         ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)
-                .categoryName(categoryName)
+                .categoryId(categoryId)
                 .date(date)
                 .from(from)
                 .to(to)

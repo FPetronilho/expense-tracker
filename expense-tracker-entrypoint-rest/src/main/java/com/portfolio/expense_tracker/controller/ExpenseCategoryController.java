@@ -55,10 +55,10 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     }
 
     @Override
-    public ResponseEntity<Void> delete(String name) {
-        log.info("Deleting expense category: {}", name);
+    public ResponseEntity<Void> delete(String id) {
+        log.info("Deleting expense category: {}", id);
         DeleteCategoryUseCase.Input input = DeleteCategoryUseCase.Input.builder()
-                .categoryName(name)
+                .categoryId(id)
                 .build();
 
         deleteCategoryUseCase.execute(input);
