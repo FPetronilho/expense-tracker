@@ -19,6 +19,7 @@ public class Constants {
 
     // Required fields validation
     public static final String EXPENSE_CATEGORY_ID_MANDATORY_MSG = "'categoryId' is mandatory.";
+    public static final String EXPENSE_DESCRIPTION_MANDATORY_MSG = "'description' is mandatory.";
     public static final String EXPENSE_AMOUNT_MANDATORY_MSG = "'amount' is mandatory.";
     public static final String CATEGORY_NAME_MANDATORY_MSG = "'name' is mandatory.";
     public static final String CATEGORY_DESCRIPTION_MANDATORY_MSG = "'description' is mandatory.";

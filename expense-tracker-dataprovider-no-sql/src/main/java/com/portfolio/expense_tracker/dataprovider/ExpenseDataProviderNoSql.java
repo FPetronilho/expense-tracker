@@ -60,7 +60,7 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
 
         // Filtering by category if provided
         if (input.getCategoryId() != null) {
-            query.addCriteria(Criteria.where("category.name").is(input.getCategoryId()));
+            query.addCriteria(Criteria.where("category.id").is(input.getCategoryId()));
         }
 
         // Date filtering
@@ -85,6 +85,11 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
             if (input.getAmountLte() != null) {
                 query.addCriteria(Criteria.where("amount").lte(input.getAmountLte()));
             }
+        }
+
+        // If a list of IDs is provided and not null, filter for those specific IDs
+        if (input.getIds() != null && !input.getIds().isEmpty()) {
+            query.addCriteria(Criteria.where("id").in(input.getIds()));
         }
 
         // Sorting logic

@@ -42,12 +42,11 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
             List<String> ids
     ) {
 
-        log.info("Listing expenses: (offset={}, limit={}, ids={})", offset, limit, ids);
-        ids = Collections.emptyList();
-
+        log.info("Listing expenses: (offset={}, limit={}, ids={}.)", offset, limit, ids);
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
                 .offset(offset)
                 .limit(limit)
+                .ids(ids)
                 .build();
 
         ListCategoriesUseCase.Output output = listCategoriesUseCase.execute(input);
@@ -56,7 +55,7 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
 
     @Override
     public ResponseEntity<Void> delete(String id) {
-        log.info("Deleting expense category: {}", id);
+        log.info("Deleting expense category: {}.", id);
         DeleteCategoryUseCase.Input input = DeleteCategoryUseCase.Input.builder()
                 .categoryId(id)
                 .build();

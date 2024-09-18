@@ -18,6 +18,7 @@ public class ExpenseCreate {
     @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG)
     private String categoryId;
 
+    @NotNull(message = Constants.EXPENSE_DESCRIPTION_MANDATORY_MSG)
     @Pattern(regexp = Constants.EXPENSE_DESCRIPTION_REGEX, message = Constants.EXPENSE_DESCRIPTION_INVALID_MSG)
     private String description;
 
