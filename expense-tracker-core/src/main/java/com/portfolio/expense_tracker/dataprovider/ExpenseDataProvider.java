@@ -16,10 +16,7 @@ public interface ExpenseDataProvider {
 
     List<Expense> listByCriteria(ListByCriteriaUseCase.Input input);
 
-    Expense update(
-            String id,
-            ExpenseUpdate expenseUpdate
-    );
+    Expense update(String id, ExpenseUpdate expenseUpdate);
 
     void delete(String id);
 }

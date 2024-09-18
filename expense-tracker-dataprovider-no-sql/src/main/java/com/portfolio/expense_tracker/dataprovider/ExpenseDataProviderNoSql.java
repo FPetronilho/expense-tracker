@@ -46,6 +46,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         return expenseMapper.toExpense(expenseDocument);
     }
 
+    //TODO: Change query to allow list by List<String> ids
+    // Tip: Use query.in
     @Override
     public List<Expense> listByCriteria(ListByCriteriaUseCase.Input input) {
         Query query = new Query();
@@ -57,8 +59,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
         ));
 
         // Filtering by category if provided
-        if (input.getCategoryName() != null) {
-            query.addCriteria(Criteria.where("category.name").is(input.getCategoryName()));
+        if (input.getCategoryId() != null) {
+            query.addCriteria(Criteria.where("category.id").is(input.getCategoryId()));
         }
 
         // Date filtering
@@ -83,6 +85,11 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
             if (input.getAmountLte() != null) {
                 query.addCriteria(Criteria.where("amount").lte(input.getAmountLte()));
             }
+        }
+
+        // If a list of IDs is provided and not null, filter for those specific IDs
+        if (input.getIds() != null && !input.getIds().isEmpty()) {
+            query.addCriteria(Criteria.where("id").in(input.getIds()));
         }
 
         // Sorting logic

@@ -11,7 +11,7 @@ public class DeleteCategoryUseCase {
     private final ExpenseCategoryDataProvider dataProvider;
 
     public void execute(Input input) {
-        dataProvider.delete(input.getCategoryName());
+        dataProvider.delete(input.getCategoryId());
     }
 
     @AllArgsConstructor
@@ -19,6 +19,6 @@ public class DeleteCategoryUseCase {
     @Data
     @Builder
     public static class Input {
-        private String categoryName;
+        private String categoryId;
     }
 }

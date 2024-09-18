@@ -16,7 +16,8 @@ public class ListCategoriesUseCase {
     public Output execute(Input input) {
         List<ExpenseCategory> expenseCategories = dataProvider.list(
                 input.getOffset(),
-                input.getLimit()
+                input.getLimit(),
+                input.getIds()
         );
 
         return Output.builder()

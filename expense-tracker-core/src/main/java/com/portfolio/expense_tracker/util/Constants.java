@@ -18,7 +18,8 @@ public class Constants {
 
 
     // Required fields validation
-    public static final String EXPENSE_CATEGORY_MANDATORY_MSG = "'category' is mandatory.";
+    public static final String EXPENSE_CATEGORY_ID_MANDATORY_MSG = "'categoryId' is mandatory.";
+    public static final String EXPENSE_DESCRIPTION_MANDATORY_MSG = "'description' is mandatory.";
     public static final String EXPENSE_AMOUNT_MANDATORY_MSG = "'amount' is mandatory.";
     public static final String CATEGORY_NAME_MANDATORY_MSG = "'name' is mandatory.";
     public static final String CATEGORY_DESCRIPTION_MANDATORY_MSG = "'description' is mandatory.";
@@ -37,9 +38,9 @@ public class Constants {
     public static final String EXPENSE_AMOUNT_LTE_INVALID_MSG = "'amountLte' must be positive.";
     public static final String EXPENSE_DESCRIPTION_INVALID_MSG = "'description' must match: " + EXPENSE_DESCRIPTION_REGEX + ".";
     public static final String EXPENSE_ID_INVALID_MSG = "'id' must match: " + ID_REGEX + ".";
-    public static final String EXPENSE_CATEGORY_VALIDATOR_MSG = "Either 'expenseCategoryName' or new 'ExpenseCategory' must be provided.";
     public static final String OFFSET_INVALID_MSG = "'offset' must be positive";
     public static final String LIMIT_INVALID_MSG = "'limit' must be in the range [" + MIN_LIMIT + ", " + MAX_LIMIT + "]";
     public static final String CATEGORY_NAME_INVALID_MSG = "'name' must match: " + CATEGORY_NAME_REGEX + ".";
+    public static final String CATEGORY_ID_INVALID_MSG = "'categoryId' must match: " + ID_REGEX + ".";
     public static final String CATEGORY_DESCRIPTION_INVALID_MSG = "'description' must match: " + CATEGORY_DESCRIPTION_REGEX + ".";
 }

@@ -36,9 +36,9 @@ public interface ExpenseCategoryRestApi {
             @RequestParam(required = false) List<String> ids
     );
 
-    @DeleteMapping(path = "/{name}")
+    @DeleteMapping(path = "/{id}")
     ResponseEntity<Void> delete(
             @PathVariable
-            @Pattern(regexp = Constants.CATEGORY_NAME_REGEX, message = Constants.CATEGORY_NAME_INVALID_MSG) String name
+            @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG) String id
     );
 }

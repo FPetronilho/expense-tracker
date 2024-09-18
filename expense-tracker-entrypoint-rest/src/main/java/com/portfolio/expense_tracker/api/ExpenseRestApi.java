@@ -47,8 +47,8 @@ public interface ExpenseRestApi {
                 @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
 
             @RequestParam(required = false)
-                @Pattern(regexp = Constants.CATEGORY_NAME_REGEX,
-                        message = Constants.CATEGORY_NAME_INVALID_MSG) String categoryName,
+                @Pattern(regexp = Constants.ID_REGEX,
+                        message = Constants.CATEGORY_ID_INVALID_MSG) String categoryId,
 
             @RequestParam(required = false)
                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
