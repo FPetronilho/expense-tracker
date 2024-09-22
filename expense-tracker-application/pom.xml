@@ -39,6 +39,10 @@
 			<groupId>com.portfolio</groupId>
 			<artifactId>expense-tracker-dataprovider-no-sql</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.portfolio</groupId>
+			<artifactId>expense-tracker-dataprovider-rest</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- #########################################################################  -->

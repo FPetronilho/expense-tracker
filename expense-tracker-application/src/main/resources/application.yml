@@ -2,26 +2,30 @@
 spring.application:
   name: expense-tracker
   version: 0.0.1-SNAPSHOT
-  environment: local
+  environment: ${ENV}
 
 server:
   port: 8080
   ssl.enabled: false # disable https
+  servlet.context-path: /${spring.application.name}
 
 logging.level:
   root: INFO
   org.springframework: INFO
   com.portfolio: INFO
 
-###################  MongoDB configuration  ###################
-spring.data.mongodb:
-  uri: mongodb://localhost:27017/ExpenseTracker
-  auto-index-creation: true
+springdoc:
+  api-docs.path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
 
 ###################  MongoDB configuration  ###################
-db.populateOnStartUp: true
+spring.data.mongodb:
+  uri: SECRET_MONGODB_ENDPOINT
+  auto-index-creation: true
 
 ###################  Authentication and Authorization  ###################
 auth.enabled: true
-auth.jwt.secret: txMcxP6URsgAekXP0PH7wRoy0UnR2v83EwREALR4Zgr6LjCVVbgmcPJbivrJZyDr
-# Jwt Example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiaWF0IjoxNzI1Njk5NjE4LCJpc3MiOiJhdXRoOCIsImF1ZCI6WyJleHBlbnNlLXRyYWNrZXIiXSwic2NvcGUiOiJFWFBFTlNFX0NSRUFURSJ9.YVuXD69pGHatIN20Ut7DeN3v7deVdkz-PZmFulayIol6CbZEmGubg79Ppmhj0RzxQwlDB48Q-2FKgvQf47ysMA
+auth.jwt.secret: SECRET_AUTH_SECRET
