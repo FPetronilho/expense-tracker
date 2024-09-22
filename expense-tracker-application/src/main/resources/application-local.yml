@@ -1,0 +1,17 @@
+###################  Microservice base configuration  ###################
+spring.application.environment: local
+
+server.port: 8080
+
+###################  Authentication and Authorization  ###################
+auth.enabled: false
+auth.jwt.secret: 0SnXhfnVgPK0EZRWfr3tV3NGDvHacT1mSg6ziXtoWhdVdhV5msi7oHDspXAqg5Bx
+# Jwt Example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiaWF0IjoxNzI1Njk5NjE4LCJpc3MiOiJhdXRoOCIsImF1ZCI6WyJwb3J0Zm9saW8tbWFuYWdlciJdLCJzY29wZSI6IkRJR0lUQUxfVVNFUl9DUkVBVEUifQ.8FJHEwGMRbdlFw_AG5l_rEg8OlO317zOlGveSfn5RDalCDEzB4VlrXjOY_vu4Yxllcx_TD6977lnpjJQA7rNkg
+
+
+###################  MongoDB configuration  ###################
+spring.data.mongodb.uri: mongodb://localhost:27017/ExpenseTracker
+
+###################  Data Provider REST configuration  ###################
+http.url:
+  portfolio-manager: "http://localhost:3000/portfolio-manager/api/v1"
