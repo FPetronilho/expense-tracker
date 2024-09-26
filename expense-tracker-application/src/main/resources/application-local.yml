@@ -3,6 +3,7 @@ spring.application.environment: local
 
 server.port: 8080
 
+
 ###################  Authentication and Authorization  ###################
 auth.enabled: false
 auth.jwt.secret: 0SnXhfnVgPK0EZRWfr3tV3NGDvHacT1mSg6ziXtoWhdVdhV5msi7oHDspXAqg5Bx
@@ -11,6 +12,7 @@ auth.jwt.secret: 0SnXhfnVgPK0EZRWfr3tV3NGDvHacT1mSg6ziXtoWhdVdhV5msi7oHDspXAqg5B
 
 ###################  MongoDB configuration  ###################
 spring.data.mongodb.uri: mongodb://localhost:27017/ExpenseTracker
+
 
 ###################  Data Provider REST configuration  ###################
 http.url:

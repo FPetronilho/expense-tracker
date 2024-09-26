@@ -43,4 +43,29 @@ public class Constants {
     public static final String CATEGORY_NAME_INVALID_MSG = "'name' must match: " + CATEGORY_NAME_REGEX + ".";
     public static final String CATEGORY_ID_INVALID_MSG = "'categoryId' must match: " + ID_REGEX + ".";
     public static final String CATEGORY_DESCRIPTION_INVALID_MSG = "'description' must match: " + CATEGORY_DESCRIPTION_REGEX + ".";
+
+
+    // Portfolio Manager Constants
+
+    // Required fields validation
+    public static final String ASSET_EXTERNAL_ID_MANDATORY_MSG = "'externalId' is mandatory.";
+    public static final String ASSET_TYPE_MANDATORY_MSG = "'type' is mandatory.";
+    public static final String ASSET_ARTIFACT_INFO_MANDATORY_MSG = "'artifactInfo' is mandatory.";
+    public static final String ASSET_PERMISSION_POLICY_MANDATORY_MSG = "'permissionPolicy' is mandatory.";
+    public static final String ASSET_GROUP_ID_MANDATORY_MSG = "'groupId' is mandatory.";
+    public static final String ASSET_ARTIFACT_ID_MANDATORY_MSG = "'artifactId' is mandatory.";
+    public static final String ASSET_VERSION_MANDATORY_MSG = "'version' is mandatory.";
+
+    // Regex
+    public static final String GROUP_ID_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,50}";
+    public static final String ARTIFACT_ID_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,50}";
+    public static final String VERSION_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,50}";
+    public static final String TYPE_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,30}";
+
+    // Fields validation
+    public static final String GROUP_ID_INVALID_MSG = "'groupId' must match: " + GROUP_ID_REGEX + ".";
+    public static final String ARTIFACT_ID_INVALID_MSG = "'artifactId' must match: " + ARTIFACT_ID_REGEX + ".";
+    public static final String VERSION_INVALID_MSG = "'version' must match: " + VERSION_REGEX + ".";
+    public static final String TYPE_INVALID_MSG = "'type' must match: " + TYPE_REGEX + ".";
+    public static final String EXTERNAL_ID_INVALID_MSG = "'externalId' must match: " + ID_REGEX + ".";
 }
