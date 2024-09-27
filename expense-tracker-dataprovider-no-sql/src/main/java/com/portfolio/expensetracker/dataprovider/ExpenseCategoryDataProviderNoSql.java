@@ -36,7 +36,7 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
     }
 
     @Override
-    public List<ExpenseCategory> list(Integer offset, Integer limit, List<String> ids) {
+    public List<ExpenseCategory> list(Integer offset, Integer limit, String ids) {
         Query query = new Query();
 
         // If a list of IDs is provided and not null, filter for those specific IDs

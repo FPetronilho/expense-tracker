@@ -77,7 +77,8 @@ public interface ExpenseRestApi {
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_DIRECTION) List<OrderDirection> orderDirectionList,
 
-            @RequestParam(required = false) List<String> ids
+            @RequestParam(required = false)
+                @Pattern(regexp = Constants.ID_LIST_REGEX, message = Constants.IDS_INVALID_MSG) String ids
     );
 
     @PatchMapping(

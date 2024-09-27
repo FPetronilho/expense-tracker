@@ -9,7 +9,7 @@ public interface ExpenseCategoryDataProvider {
 
     ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate);
 
-    List<ExpenseCategory> list(Integer offset, Integer limit, List<String> ids);
+    List<ExpenseCategory> list(Integer offset, Integer limit, String ids);
 
     void delete(String id);
 

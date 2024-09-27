@@ -1,4 +1,4 @@
-package com.portfolio.expensetracker.portfoliomanager.dto.request;
+package com.portfolio.expensetracker.dto.portfoliomanager.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;

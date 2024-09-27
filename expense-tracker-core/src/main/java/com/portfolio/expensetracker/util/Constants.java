@@ -61,6 +61,7 @@ public class Constants {
     public static final String ARTIFACT_ID_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,50}";
     public static final String VERSION_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,50}";
     public static final String TYPE_REGEX = "[ \\wÀ-ú\\.:,;\\-\\[\\]()]{1,30}";
+    public static final String ID_LIST_REGEX = "[a-fA-F\\d\\-]{" + (36 * MAX_LIMIT) + "}";
 
     // Fields validation
     public static final String GROUP_ID_INVALID_MSG = "'groupId' must match: " + GROUP_ID_REGEX + ".";
@@ -68,4 +69,6 @@ public class Constants {
     public static final String VERSION_INVALID_MSG = "'version' must match: " + VERSION_REGEX + ".";
     public static final String TYPE_INVALID_MSG = "'type' must match: " + TYPE_REGEX + ".";
     public static final String EXTERNAL_ID_INVALID_MSG = "'externalId' must match: " + ID_REGEX + ".";
+    public static final String DIGITAL_USER_ID_INVALID_MSG = "'digitalUserId' must match: " + ID_REGEX + ".";
+    public static final String IDS_INVALID_MSG = "'ids' must match: " + ID_LIST_REGEX + ".";
 }

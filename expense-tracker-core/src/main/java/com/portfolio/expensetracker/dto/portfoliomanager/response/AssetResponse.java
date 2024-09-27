@@ -1,4 +1,4 @@
-package com.portfolio.expensetracker.portfoliomanager.dto.response;
+package com.portfolio.expensetracker.dto.portfoliomanager.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

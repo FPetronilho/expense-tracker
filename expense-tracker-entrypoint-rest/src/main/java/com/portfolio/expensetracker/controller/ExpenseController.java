@@ -65,7 +65,7 @@ public class ExpenseController implements ExpenseRestApi {
             Float amountLte,
             List<OrderBy> orderByList,
             List<OrderDirection> orderDirectionList,
-            List<String> ids
+            String ids
     ) {
 
         // Input treatment

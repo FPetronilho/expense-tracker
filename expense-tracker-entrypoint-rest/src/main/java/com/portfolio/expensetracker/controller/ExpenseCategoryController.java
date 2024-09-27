@@ -38,7 +38,7 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     public ResponseEntity<List<ExpenseCategory>> list(
             Integer offset,
             Integer limit,
-            List<String> ids
+            String ids
     ) {
 
         log.info("Listing expenses: (offset={}, limit={}, ids={}.)", offset, limit, ids);
