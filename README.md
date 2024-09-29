@@ -67,11 +67,9 @@ An asset is an entity that belongs to the user.
 In this domain, an expense is an asset of the user, as well as a category.
 
 This service manages assets:
-    • Inserts - **REQ-F-015**;
-    • Consults by ID - **REQ-F-016**;
-    • Lists by multiple criteria - **REQ-F-017**;
-    • Updates - **REQ-F-018**;
-    • Deletes - **REQ-F-019**.
+    • Inserts - **REQ-F-015**; (done)
+    • Lists by multiple criteria - **REQ-F-017**; (done)
+    • Deletes - **REQ-F-019**. (done)
 
 User:
     • ID (internal, e.g., UUID);
