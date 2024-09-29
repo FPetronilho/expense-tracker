@@ -7,6 +7,8 @@ import com.portfolio.expensetracker.domain.Expense;
 import com.portfolio.expensetracker.domain.ExpenseCategory;
 import com.portfolio.expensetracker.dto.ExpenseCreate;
 import com.portfolio.expensetracker.dto.portfoliomanager.request.AssetRequest;
+import com.portfolio.expensetracker.security.context.DigitalUser;
+import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +21,21 @@ public class CreateUseCase {
     private final PortfolioManagerDataProvider portfolioManagerDataProvider;
 
     public Output execute(Input input) {
+        // 1. Create expense in DB
         ExpenseCreate expenseCreate = input.getExpenseCreate();
         ExpenseCategory expenseCategory = findExpenseCategoryById(expenseCreate);
-
         Expense expense = expenseDataProvider.create(expenseCreate, expenseCategory);
-        AssetRequest assetRequest = mapExpenseToAssetRequest(expense);
-        portfolioManagerDataProvider.createAsset(assetRequest);
+
+        // 2. Create (expense) asset in Portfolio Management
+        // TODO: if asset could not be created in PM, rollback the insert in DB.
+        // TIP: add a try catch surrounding createAsset()
+        AssetRequest assetRequest = toAssetRequest(expense);
+        DigitalUser user = SecurityUtil.getDigitalUser();
+        portfolioManagerDataProvider.createAsset(
+                input.getJwt(),
+                user.getId(),
+                assetRequest
+        );
 
         return Output.builder()
                 .expense(expense)
@@ -35,7 +46,8 @@ public class CreateUseCase {
         return expenseCategoryDataProvider.findById(expenseCreate.getCategoryId());
     }
 
-    private AssetRequest mapExpenseToAssetRequest(Expense expense) {
+    // TODO: move this method to a Mapper
+    private AssetRequest toAssetRequest(Expense expense) {
         return AssetRequest.builder()
                 .externalId(expense.getId())
                 .type("expense")
@@ -55,6 +67,7 @@ public class CreateUseCase {
     @Data
     @Builder
     public static class Input {
+        private String jwt;
         private ExpenseCreate expenseCreate;
     }
 

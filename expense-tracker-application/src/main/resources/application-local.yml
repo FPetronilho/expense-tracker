@@ -5,9 +5,9 @@ server.port: 8080
 
 
 ###################  Authentication and Authorization  ###################
-auth.enabled: false
+auth.enabled: true
 auth.jwt.secret: 0SnXhfnVgPK0EZRWfr3tV3NGDvHacT1mSg6ziXtoWhdVdhV5msi7oHDspXAqg5Bx
-# Jwt Example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiaWF0IjoxNzI1Njk5NjE4LCJpc3MiOiJhdXRoOCIsImF1ZCI6WyJwb3J0Zm9saW8tbWFuYWdlciJdLCJzY29wZSI6IkRJR0lUQUxfVVNFUl9DUkVBVEUifQ.8FJHEwGMRbdlFw_AG5l_rEg8OlO317zOlGveSfn5RDalCDEzB4VlrXjOY_vu4Yxllcx_TD6977lnpjJQA7rNkg
+# Jwt Example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiZGlnaXRhbFVzZXJJZCI6IjRmMTE4ODY4LTE2ODQtNDc5My1hOTFjLWRjMGUxZWM1N2UzNCIsImlhdCI6MTcyNTY5OTYxOCwiaXNzIjoiYXV0aDgiLCJhdWQiOlsiZXhwZW5zZS10cmFja2VyIiwicG9ydGZvbGlvLW1hbmFnZXIiXSwic2NvcGUiOiJESUdJVEFMX1VTRVJfQ1JFQVRFIn0.cjT2OfvEZKiHOeYcmWyYI1MZhhJCUOqR-HWofOaMix3dZLIne5WKiMSrB-QpCybtmFCAfxgocwWPfAAk40AZKQ
 
 
 ###################  MongoDB configuration  ###################

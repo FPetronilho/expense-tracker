@@ -8,6 +8,9 @@ import com.portfolio.expensetracker.dto.ExpenseCreate;
 import com.portfolio.expensetracker.dto.ExpenseUpdate;
 import com.portfolio.expensetracker.exception.ParameterValidationFailedException;
 import com.portfolio.expensetracker.usecases.expense.*;
+import com.portfolio.expensetracker.util.AuthenticationConstants;
+import com.portfolio.expensetracker.util.Constants;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,11 +32,16 @@ public class ExpenseController implements ExpenseRestApi {
     private final ListByCriteriaUseCase listByCriteriaUseCase;
     private final UpdateUseCase updateUseCase;
     private final DeleteUseCase deleteUseCase;
+    private final HttpServletRequest httpRequest;
 
     @Override
     public ResponseEntity<Expense> create(ExpenseCreate expenseCreate) {
         log.info("Creating expense: {}.", expenseCreate);
+
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         CreateUseCase.Input input = CreateUseCase.Input.builder()
+                .jwt(jwt)
                 .expenseCreate(expenseCreate)
                 .build();
 
@@ -109,8 +117,11 @@ public class ExpenseController implements ExpenseRestApi {
             );
         }
 
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         // Method logic
         ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
+                .jwt(jwt)
                 .offset(offset)
                 .limit(limit)
                 .categoryId(categoryId)

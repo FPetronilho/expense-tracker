@@ -5,6 +5,7 @@ import com.portfolio.expensetracker.exception.AuthenticationFailedException;
 import com.portfolio.expensetracker.exception.BusinessException;
 import com.portfolio.expensetracker.exception.ExceptionDto;
 import com.portfolio.expensetracker.mapper.ExceptionMapperEntryPointRest;
+import com.portfolio.expensetracker.security.context.DigitalUser;
 import com.portfolio.expensetracker.util.AuthenticationConstants;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.FilterChain;
@@ -57,6 +58,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     ) throws MalformedClaimException {
 
         String subject = claims.getSubject();
+        String digitalUserId = claims.getClaimValueAsString(AuthenticationConstants.Authentication.Jwt.Claim.DIGITAL_USER_ID.getValue());
         String scopes = claims.getClaimValueAsString(AuthenticationConstants.Authentication.Jwt.Claim.SCOPE.getValue());
         List<SimpleGrantedAuthority> authorities;
 
@@ -68,8 +70,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             authorities = Collections.emptyList();
         }
 
+        DigitalUser user = DigitalUser.builder()
+                .id(digitalUserId)
+                .subject(subject)
+                .build();
+
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                subject,
+                user,
                 null,
                 authorities
         );

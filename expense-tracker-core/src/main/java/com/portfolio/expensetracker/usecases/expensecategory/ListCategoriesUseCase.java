@@ -4,6 +4,8 @@ import com.portfolio.expensetracker.dataprovider.ExpenseCategoryDataProvider;
 import com.portfolio.expensetracker.dataprovider.PortfolioManagerDataProvider;
 import com.portfolio.expensetracker.domain.ExpenseCategory;
 import com.portfolio.expensetracker.dto.portfoliomanager.response.AssetResponse;
+import com.portfolio.expensetracker.security.context.DigitalUser;
+import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +19,13 @@ public class ListCategoriesUseCase {
     private final PortfolioManagerDataProvider portfolioManagerDataProvider;
 
     public Output execute(Input input) {
+        DigitalUser user = SecurityUtil.getDigitalUser();
+
         List<AssetResponse> assetResponseList = portfolioManagerDataProvider.listAssets(
+                input.getJwt(),
+                user.getId(),
                 input.getOffset(),
                 input.getLimit(),
-                input.getIds(),
                 "com.portfolio",
                 "expense-tracker",
                 "expense-category",
@@ -50,6 +55,7 @@ public class ListCategoriesUseCase {
     @Data
     @Builder
     public static class Input {
+        private String jwt;
         private Integer offset;
         private Integer limit;
         private String ids;

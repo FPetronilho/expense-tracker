@@ -2,10 +2,11 @@ package com.portfolio.expensetracker.usecases.expensecategory;
 
 import com.portfolio.expensetracker.dataprovider.ExpenseCategoryDataProvider;
 import com.portfolio.expensetracker.dataprovider.PortfolioManagerDataProvider;
-import com.portfolio.expensetracker.domain.Expense;
 import com.portfolio.expensetracker.domain.ExpenseCategory;
 import com.portfolio.expensetracker.dto.ExpenseCategoryCreate;
 import com.portfolio.expensetracker.dto.portfoliomanager.request.AssetRequest;
+import com.portfolio.expensetracker.security.context.DigitalUser;
+import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,28 @@ public class CreateCategoryUseCase {
     private final PortfolioManagerDataProvider portfolioManagerDataProvider;
 
     public Output execute(Input input) {
+        // 1. Create expense in DB
         ExpenseCategoryCreate expenseCategoryCreate = input.getExpenseCategoryCreate();
         ExpenseCategory expenseCategory = dataProvider.create(expenseCategoryCreate);
 
-        AssetRequest assetRequest = mapExpenseCategoryToAssetRequest(expenseCategory);
-        portfolioManagerDataProvider.createAsset(assetRequest);
+        // 2. Create (expense-category) asset in Portfolio Management
+        // TODO: if asset could not be created in PM, rollback the insert in DB.
+        // TIP: add a try catch surrounding createAsset()
+        AssetRequest assetRequest = toAssetRequest(expenseCategory);
+        DigitalUser user = SecurityUtil.getDigitalUser();
+        portfolioManagerDataProvider.createAsset(
+                input.getJwt(),
+                user.getId(),
+                assetRequest
+        );
 
         return Output.builder()
                 .expenseCategory(expenseCategory)
                 .build();
     }
 
-    private AssetRequest mapExpenseCategoryToAssetRequest(ExpenseCategory expenseCategory) {
+    // TODO: move this method to a Mapper
+    private AssetRequest toAssetRequest(ExpenseCategory expenseCategory) {
         return AssetRequest.builder()
                 .externalId(expenseCategory.getId())
                 .type("expense-category")
@@ -48,6 +59,7 @@ public class CreateCategoryUseCase {
     @Data
     @Builder
     public static class Input {
+        private String jwt;
         private ExpenseCategoryCreate expenseCategoryCreate;
     }
 

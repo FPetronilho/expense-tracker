@@ -8,12 +8,17 @@ import java.util.List;
 
 public interface PortfolioManagerDataProvider {
 
-    AssetResponse createAsset(AssetRequest assetRequest);
+    AssetResponse createAsset(
+            String jwt,
+            String digitalUserId,
+            AssetRequest assetRequest
+    );
 
     List<AssetResponse> listAssets(
+            String jwt,
+            String digitalUserId,
             Integer offset,
             Integer limit,
-            String ids,
             String groupId,
             String artifactId,
             String type,

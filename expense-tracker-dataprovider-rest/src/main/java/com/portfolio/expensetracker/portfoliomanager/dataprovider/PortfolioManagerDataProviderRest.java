@@ -19,15 +19,24 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
     private final PortfolioManagerHttpClient client;
 
     @Override
-    public AssetResponse createAsset(AssetRequest assetRequest) {
-        return client.createAsset(assetRequest);
+    public AssetResponse createAsset(
+            String jwt,
+            String digitalUserId,
+            AssetRequest assetRequest
+    ) {
+        return client.createAsset(
+                jwt,
+                digitalUserId,
+                assetRequest
+        );
     }
 
     @Override
     public List<AssetResponse> listAssets(
+            String jwt,
+            String digitalUserId,
             Integer offset,
             Integer limit,
-            String ids,
             String groupId,
             String artifactId,
             String type,
@@ -35,11 +44,11 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
             LocalDateTime createdAt,
             LocalDateTime createdAtGte
     ) {
-
         return client.listAssets(
+                jwt,
+                digitalUserId,
                 offset,
                 limit,
-                ids,
                 groupId,
                 artifactId,
                 type,

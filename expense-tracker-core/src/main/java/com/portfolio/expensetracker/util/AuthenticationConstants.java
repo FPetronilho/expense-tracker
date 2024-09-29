@@ -16,6 +16,7 @@ public class AuthenticationConstants {
         @RequiredArgsConstructor
         public enum Scope {
 
+            // TODO: scope validation is not working
             EXPENSE_CREATE("EXPENSE_CREATE", HttpMethod.POST, "/api/v1/expenses");
 
             private final String value;
@@ -45,7 +46,8 @@ public class AuthenticationConstants {
             @RequiredArgsConstructor
             public enum Claim {
 
-                SCOPE("scope");
+                SCOPE("scope"),
+                DIGITAL_USER_ID("digitalUserId");
 
                 private final String value;
             }
