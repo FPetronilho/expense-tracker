@@ -5,6 +5,7 @@ import com.portfolio.expensetracker.dataprovider.PortfolioManagerDataProvider;
 import com.portfolio.expensetracker.domain.ExpenseCategory;
 import com.portfolio.expensetracker.dto.ExpenseCategoryCreate;
 import com.portfolio.expensetracker.dto.portfoliomanager.request.AssetRequest;
+import com.portfolio.expensetracker.mapper.AssetMapper;
 import com.portfolio.expensetracker.security.context.DigitalUser;
 import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
@@ -25,7 +26,7 @@ public class CreateCategoryUseCase {
         // 2. Create (expense-category) asset in Portfolio Management
         // TODO: if asset could not be created in PM, rollback the insert in DB.
         // TIP: add a try catch surrounding createAsset()
-        AssetRequest assetRequest = toAssetRequest(expenseCategory);
+        AssetRequest assetRequest = AssetMapper.toAssetRequest(expenseCategory);
         DigitalUser user = SecurityUtil.getDigitalUser();
         portfolioManagerDataProvider.createAsset(
                 input.getJwt(),
@@ -35,22 +36,6 @@ public class CreateCategoryUseCase {
 
         return Output.builder()
                 .expenseCategory(expenseCategory)
-                .build();
-    }
-
-    // TODO: move this method to a Mapper
-    private AssetRequest toAssetRequest(ExpenseCategory expenseCategory) {
-        return AssetRequest.builder()
-                .externalId(expenseCategory.getId())
-                .type("expense-category")
-                .artifactInfo(
-                        new AssetRequest.ArtifactInformation(
-                                "com.portfolio",
-                                "expense-tracker",
-                                "0.0.1-SNAPSHOT"
-                        )
-                )
-                .permissionPolicy(AssetRequest.PermissionPolicy.OWNER)
                 .build();
     }
 
