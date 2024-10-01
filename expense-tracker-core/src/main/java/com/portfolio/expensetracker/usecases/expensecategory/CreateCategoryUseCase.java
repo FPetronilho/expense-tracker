@@ -24,15 +24,18 @@ public class CreateCategoryUseCase {
         ExpenseCategory expenseCategory = dataProvider.create(expenseCategoryCreate);
 
         // 2. Create (expense-category) asset in Portfolio Management
-        // TODO: if asset could not be created in PM, rollback the insert in DB.
-        // TIP: add a try catch surrounding createAsset()
         AssetRequest assetRequest = AssetMapper.toAssetRequest(expenseCategory);
         DigitalUser user = SecurityUtil.getDigitalUser();
-        portfolioManagerDataProvider.createAsset(
-                input.getJwt(),
-                user.getId(),
-                assetRequest
-        );
+
+        try {
+            portfolioManagerDataProvider.createAsset(
+                    input.getJwt(),
+                    user.getId(),
+                    assetRequest
+            );
+        } catch (Exception e) {
+            dataProvider.delete(expenseCategory.getId());
+        }
 
         return Output.builder()
                 .expenseCategory(expenseCategory)
