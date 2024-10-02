@@ -37,7 +37,6 @@ public class ExpenseController implements ExpenseRestApi {
     @Override
     public ResponseEntity<Expense> create(ExpenseCreate expenseCreate) {
         log.info("Creating expense: {}.", expenseCreate);
-
         String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
 
         CreateUseCase.Input input = CreateUseCase.Input.builder()
@@ -156,7 +155,10 @@ public class ExpenseController implements ExpenseRestApi {
     @Override
     public ResponseEntity<Void> delete(String id) {
         log.info("Deleting expense: {}.", id);
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         DeleteUseCase.Input input = DeleteUseCase.Input.builder()
+                .jwt(jwt)
                 .id(id)
                 .build();
 

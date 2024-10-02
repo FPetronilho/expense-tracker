@@ -26,4 +26,9 @@ public interface PortfolioManagerDataProvider {
             LocalDateTime createdAt,
             LocalDateTime createdAtGte
     );
+
+    void deleteAsset(
+            String jwt,
+            String externalId
+    );
 }

@@ -29,7 +29,6 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     @Override
     public ResponseEntity<ExpenseCategory> create(ExpenseCategoryCreate expenseCategoryCreate) {
         log.info("Creating expense category: {}.", expenseCategoryCreate);
-
         String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
 
         CreateCategoryUseCase.Input input = CreateCategoryUseCase.Input.builder()
@@ -49,7 +48,6 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     ) {
 
         log.info("Listing expenses: (offset={}, limit={}, ids={}.)", offset, limit, ids);
-
         String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
 
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
@@ -66,7 +64,10 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
     @Override
     public ResponseEntity<Void> delete(String id) {
         log.info("Deleting expense category: {}.", id);
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         DeleteCategoryUseCase.Input input = DeleteCategoryUseCase.Input.builder()
+                .jwt(jwt)
                 .categoryId(id)
                 .build();
 

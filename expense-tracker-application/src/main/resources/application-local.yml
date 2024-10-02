@@ -18,4 +18,4 @@ spring.data.mongodb.uri: mongodb://localhost:27017/ExpenseTracker
 
 ###################  Data Provider REST configuration  ###################
 http.url:
-  portfolio-manager: "http://localhost:3000/portfolio-manager/api/v1"
+  portfolio-manager: "http://localhost:8081/portfolio-manager/api/v1"

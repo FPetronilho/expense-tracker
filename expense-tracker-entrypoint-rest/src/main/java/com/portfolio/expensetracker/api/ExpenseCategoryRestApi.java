@@ -27,19 +27,18 @@ public interface ExpenseCategoryRestApi {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<ExpenseCategory>> list(
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_OFFSET)
-                @Min(value = Constants.MIN_OFFSET, message = Constants.OFFSET_INVALID_MSG) Integer offset,
+            @Min(value = Constants.MIN_OFFSET, message = Constants.OFFSET_INVALID_MSG) Integer offset,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
-                @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
-                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
+            @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
+            @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
 
             @RequestParam(required = false)
-                @Pattern(regexp = Constants.ID_LIST_REGEX, message = Constants.IDS_INVALID_MSG) String ids
+            @Pattern(regexp = Constants.ID_LIST_REGEX, message = Constants.IDS_INVALID_MSG) String ids
     );
 
     @DeleteMapping(path = "/{id}")
     ResponseEntity<Void> delete(
-            @PathVariable
-            @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG) String id
+            @PathVariable @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG) String id
     );
 }

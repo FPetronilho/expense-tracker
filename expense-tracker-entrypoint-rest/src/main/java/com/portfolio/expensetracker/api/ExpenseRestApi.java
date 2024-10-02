@@ -45,40 +45,39 @@ public interface ExpenseRestApi {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Expense>> listByCriteria(
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_OFFSET)
-                @Min(value = Constants.MIN_OFFSET, message = Constants.OFFSET_INVALID_MSG) Integer offset,
+            @Min(value = Constants.MIN_OFFSET, message = Constants.OFFSET_INVALID_MSG) Integer offset,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_LIMIT)
-                @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
-                @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
+            @Min(value = Constants.MIN_LIMIT, message = Constants.LIMIT_INVALID_MSG)
+            @Max(value = Constants.MAX_LIMIT, message = Constants.LIMIT_INVALID_MSG) Integer limit,
 
             @RequestParam(required = false)
-                @Pattern(regexp = Constants.ID_REGEX,
-                        message = Constants.CATEGORY_ID_INVALID_MSG) String categoryId,
+            @Pattern(regexp = Constants.ID_REGEX, message = Constants.CATEGORY_ID_INVALID_MSG) String categoryId,
 
             @RequestParam(required = false)
-                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
 
             @RequestParam(required = false)
-                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
 
             @RequestParam(required = false)
-                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
 
             @RequestParam(required = false)
-                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_INVALID_MSG) Float amount,
+            @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_INVALID_MSG) Float amount,
 
             @RequestParam(required = false)
-                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_GTE_INVALID_MSG) Float amountGte,
+            @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_GTE_INVALID_MSG) Float amountGte,
 
             @RequestParam(required = false)
-                @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_LTE_INVALID_MSG) Float amountLte,
+            @Min(value = Constants.MIN_AMOUNT, message = Constants.EXPENSE_AMOUNT_LTE_INVALID_MSG) Float amountLte,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_ORDER) List<OrderBy> orderByList,
 
             @RequestParam(required = false, defaultValue = Constants.DEFAULT_DIRECTION) List<OrderDirection> orderDirectionList,
 
             @RequestParam(required = false)
-                @Pattern(regexp = Constants.ID_LIST_REGEX, message = Constants.IDS_INVALID_MSG) String ids
+            @Pattern(regexp = Constants.ID_LIST_REGEX, message = Constants.IDS_INVALID_MSG) String ids
     );
 
     @PatchMapping(

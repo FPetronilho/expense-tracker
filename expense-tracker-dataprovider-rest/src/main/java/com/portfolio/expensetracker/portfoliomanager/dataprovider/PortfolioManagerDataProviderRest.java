@@ -57,4 +57,12 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
                 createdAtGte
         );
     }
+
+    @Override
+    public void deleteAsset(
+            String jwt,
+            String externalId
+    ) {
+        client.deleteAsset(jwt, externalId);
+    }
 }
