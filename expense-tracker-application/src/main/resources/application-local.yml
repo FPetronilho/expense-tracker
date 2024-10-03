@@ -1,0 +1,21 @@
+###################  Microservice base configuration  ###################
+spring.application.environment: local
+
+server.port: 8080
+
+
+###################  Authentication and Authorization  ###################
+auth.enabled: true
+auth.jwt.secret: 0SnXhfnVgPK0EZRWfr3tV3NGDvHacT1mSg6ziXtoWhdVdhV5msi7oHDspXAqg5Bx
+# Jwt Chico: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkNoaWNvIiwiZGlnaXRhbFVzZXJJZCI6ImU1NTg1MzllLTlhNmEtNGI4Yy1iNjk1LTI2MmI0M2VkNDg1YiIsImlhdCI6MTcyNTY5OTYxOCwiaXNzIjoiYXV0aDgiLCJhdWQiOlsiZXhwZW5zZS10cmFja2VyIiwicG9ydGZvbGlvLW1hbmFnZXIiXSwic2NvcGUiOiJESUdJVEFMX1VTRVJfQ1JFQVRFIn0.tQSUg2JVVGQY05cM7n07ul9UFboa9bE7pH-CDI7dnSRrcRC3LcBFOkLovWzRfI9S3oiRpPwaOIAphAwHfK7S3A
+# Jwt Ricardo: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IlJpY2FyZG8iLCJkaWdpdGFsVXNlcklkIjoiMjEyYWQ2MjItMmVlYy00ZjBiLTlhOTUtZDA5Mjk4NmMyNTYxIiwiaWF0IjoxNzI1Njk5NjE4LCJpc3MiOiJhdXRoOCIsImF1ZCI6WyJleHBlbnNlLXRyYWNrZXIiLCJwb3J0Zm9saW8tbWFuYWdlciJdLCJzY29wZSI6IkRJR0lUQUxfVVNFUl9DUkVBVEUifQ.QIsZZKz2yi_jDTJNKA_UVADj9Ackn1YtdLv-5avmn9jsepQVPkfkVYSgimj1F2-Z-bChoecumz5XExfeXDWkog
+# Jwt Fernando: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzU2ODk1OTksInN1YiI6IkZlcm5hbmRvIiwiZGlnaXRhbFVzZXJJZCI6Ijk3ZjUzMmY1LWY4NzQtNDMyZS1iYjAyLTQ1MTEzODYwNDE4YiIsImlhdCI6MTcyNTY5OTYxOCwiaXNzIjoiYXV0aDgiLCJhdWQiOlsiZXhwZW5zZS10cmFja2VyIiwicG9ydGZvbGlvLW1hbmFnZXIiXSwic2NvcGUiOiJESUdJVEFMX1VTRVJfQ1JFQVRFIn0.QjHkCIDMK8jA2-AjTMzG5vir32AmDGIx35wmi38M42ko3Yva02NsbX2mp74EOtCLYu6efSr96ZlHWHSuWHCDYg
+
+
+###################  MongoDB configuration  ###################
+spring.data.mongodb.uri: mongodb://localhost:27017/ExpenseTracker
+
+
+###################  Data Provider REST configuration  ###################
+http.url:
+  portfolio-manager: "http://localhost:8081/portfolio-manager/api/v1"

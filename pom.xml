@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
+		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -34,6 +34,7 @@
 		<module>expense-tracker-entrypoint-rest</module>
 		<module>expense-tracker-core</module>
 		<module>expense-tracker-dataprovider-no-sql</module>
+		<module>expense-tracker-dataprovider-rest</module>
 	</modules>
 
 	<!-- ######################################################################### -->
@@ -41,6 +42,7 @@
 	<!-- ######################################################################### -->
 
 	<dependencyManagement>
+		<!-- internal dependencies -->
 		<dependencies>
 			<dependency>
 				<groupId>com.portfolio</groupId>
@@ -61,6 +63,19 @@
 				<groupId>com.portfolio</groupId>
 				<artifactId>expense-tracker-dataprovider-no-sql</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.portfolio</groupId>
+				<artifactId>expense-tracker-dataprovider-rest</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- external dependencies -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2023.0.3</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -100,14 +115,9 @@
 
 		<!-- Swagger -->
 		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-maven-plugin</artifactId>
-			<version>${swagger-maven-plugin.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc-openapi-ui.version}</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
 		</dependency>
 
 		<!-- Lombok -->
@@ -128,6 +138,12 @@
 			<artifactId>mapstruct-processor</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- ######################################################################### -->
@@ -142,18 +158,17 @@
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
 		<!-- Spring Boot -->
-		<spring-boot-starter-parent.version>3.3.2</spring-boot-starter-parent.version>
-		<spring-context.version>6.0.2</spring-context.version>
+		<spring-boot-starter-parent.version>3.3.4</spring-boot-starter-parent.version>
+		<spring-context.version>6.1.13</spring-context.version>
 
 		<!-- Swagger -->
-		<swagger-maven-plugin.version>2.2.22</swagger-maven-plugin.version>
-		<springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
 
 		<!-- Lombok -->
 		<lombok.version>1.18.34</lombok.version>
 
 		<!-- MapStruct -->
-		<mapstruct.version>1.6.0</mapstruct.version>
+		<mapstruct.version>1.6.2</mapstruct.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 	</properties>
 

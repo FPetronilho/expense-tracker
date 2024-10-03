@@ -1,0 +1,2 @@
+###################  Microservice base configuration  ###################
+spring.application.environment: pre
