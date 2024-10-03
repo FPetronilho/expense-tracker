@@ -20,6 +20,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,7 +88,8 @@ public class ExpenseDataProviderNoSql implements ExpenseDataProvider {
 
         // If a list of IDs is provided and not null, filter for those specific IDs
         if (input.getIds() != null && !input.getIds().isEmpty()) {
-            query.addCriteria(Criteria.where("id").in(input.getIds()));
+            List<String> idsList = Arrays.asList(input.getIds().split(","));
+            query.addCriteria(Criteria.where("id").in(idsList));
         }
 
         // Sorting logic

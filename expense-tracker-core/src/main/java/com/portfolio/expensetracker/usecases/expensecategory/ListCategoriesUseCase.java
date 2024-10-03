@@ -10,6 +10,7 @@ import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,8 +37,16 @@ public class ListCategoriesUseCase {
 
         String assetIds = assetResponseList.stream()
                 .map(AssetResponse::getExternalId)
-                .toList()
-                .toString();
+                .collect(Collectors.joining(","));
+
+        /* If statement prevents from returning all categories in expense tracker database in case of an empty list.
+           Default behaviour of API is that if a list is empty, it assumes that the parameter was not inputted, hence
+           returning all assets.
+         */
+
+        if (assetIds.isEmpty()) {
+            assetIds = " ";
+        }
 
         List<ExpenseCategory> expenseCategories = dataProvider.list(
                 input.getOffset(),

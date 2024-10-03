@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,8 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
 
         // If a list of IDs is provided and not null, filter for those specific IDs
         if (ids != null && !ids.isEmpty()) {
-            query.addCriteria(Criteria.where("id").in(ids));
+            List<String> idsList = Arrays.asList(ids.split(","));
+            query.addCriteria(Criteria.where("id").in(idsList));
         }
 
         query.with(PageRequest.of(offset, limit));
