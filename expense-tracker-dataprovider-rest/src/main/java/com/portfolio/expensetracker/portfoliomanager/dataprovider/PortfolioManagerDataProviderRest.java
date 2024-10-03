@@ -24,11 +24,7 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
             String digitalUserId,
             AssetRequest assetRequest
     ) {
-        return client.createAsset(
-                jwt,
-                digitalUserId,
-                assetRequest
-        );
+        return client.createAsset(jwt, digitalUserId, assetRequest);
     }
 
     @Override

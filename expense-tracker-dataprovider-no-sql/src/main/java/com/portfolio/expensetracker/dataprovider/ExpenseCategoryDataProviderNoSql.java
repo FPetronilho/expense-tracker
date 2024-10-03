@@ -27,10 +27,6 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
 
     @Override
     public ExpenseCategory create(ExpenseCategoryCreate expenseCategoryCreate) {
-        if (existsByName(expenseCategoryCreate.getName())) {
-            throw new ResourceAlreadyExistsException(ExpenseCategoryDocument.class, expenseCategoryCreate.getName());
-        }
-
         ExpenseCategoryDocument expenseCategoryDocument = mapper.toExpenseCategoryDocument(expenseCategoryCreate);
         expenseCategoryDocument = mongoTemplate.save(expenseCategoryDocument);
         return mapper.toExpenseCategory(expenseCategoryDocument);
@@ -71,10 +67,5 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
         );
 
         return mapper.toExpenseCategory(expenseCategoryDocument);
-    }
-
-    private boolean existsByName(String name) {
-        Query query = new Query().addCriteria(Criteria.where("name").is(name));
-        return mongoTemplate.exists(query, ExpenseCategoryDocument.class);
     }
 }
