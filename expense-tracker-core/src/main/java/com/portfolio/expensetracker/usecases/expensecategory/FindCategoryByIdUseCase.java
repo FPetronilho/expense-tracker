@@ -1,8 +1,8 @@
-package com.portfolio.expensetracker.usecases.expense;
+package com.portfolio.expensetracker.usecases.expensecategory;
 
-import com.portfolio.expensetracker.dataprovider.ExpenseDataProvider;
+import com.portfolio.expensetracker.dataprovider.ExpenseCategoryDataProvider;
 import com.portfolio.expensetracker.dataprovider.PortfolioManagerDataProvider;
-import com.portfolio.expensetracker.domain.Expense;
+import com.portfolio.expensetracker.domain.ExpenseCategory;
 import com.portfolio.expensetracker.dto.portfoliomanager.response.AssetResponse;
 import com.portfolio.expensetracker.exception.ResourceNotFoundException;
 import com.portfolio.expensetracker.security.context.DigitalUser;
@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -20,10 +21,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FindByIdUseCase {
+@Slf4j
+public class FindCategoryByIdUseCase {
 
     private final PortfolioManagerDataProvider portfolioManagerDataProvider;
-    private final ExpenseDataProvider expenseDataProvider;
+    private final ExpenseCategoryDataProvider expenseCategoryDataProvider;
 
     public Output execute(Input input) {
         DigitalUser digitalUser = SecurityUtil.getDigitalUser();
@@ -36,20 +38,20 @@ public class FindByIdUseCase {
                 1,
                 "com.portfolio",
                 "expense-tracker",
-                "expense",
+                "expense-category",
                 null,
                 null,
                 null
         );
 
         if (CollectionUtils.isEmpty(assetResponseList)) {
-            throw new ResourceNotFoundException(Expense.class, input.getId());
+            throw new ResourceNotFoundException(ExpenseCategory.class, input.getId());
         }
 
-        Expense expense = expenseDataProvider.findById(input.getId());
+        ExpenseCategory expenseCategory = expenseCategoryDataProvider.findById(input.getId());
 
         return Output.builder()
-                .expense(expense)
+                .expenseCategory(expenseCategory)
                 .asset(assetResponseList.get(0))
                 .build();
     }
@@ -68,7 +70,8 @@ public class FindByIdUseCase {
     @Data
     @Builder
     public static class Output {
-        private Expense expense;
+        private ExpenseCategory expenseCategory;
         private AssetResponse asset;
     }
+
 }

@@ -7,6 +7,7 @@ import com.portfolio.expensetracker.portfoliomanager.client.PortfolioManagerHttp
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +32,7 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
     public List<AssetResponse> listAssets(
             String jwt,
             String digitalUserId,
+            List<String> externalIds,
             Integer offset,
             Integer limit,
             String groupId,
@@ -43,6 +45,9 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
         return client.listAssets(
                 jwt,
                 digitalUserId,
+                !CollectionUtils.isEmpty(externalIds)
+                        ? String.join(",", externalIds)
+                        : null,
                 offset,
                 limit,
                 groupId,

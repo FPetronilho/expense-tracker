@@ -8,7 +8,9 @@ import com.portfolio.expensetracker.security.context.DigitalUser;
 import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,7 @@ public class ListCategoriesUseCase {
         List<AssetResponse> assetResponseList = portfolioManagerDataProvider.listAssets(
                 input.getJwt(),
                 user.getId(),
+                input.getIds(),
                 input.getOffset(),
                 input.getLimit(),
                 "com.portfolio",
@@ -35,24 +38,21 @@ public class ListCategoriesUseCase {
                 null
         );
 
-        String assetIds = assetResponseList.stream()
+        List<String> assetIds = assetResponseList.stream()
                 .map(AssetResponse::getExternalId)
-                .collect(Collectors.joining(","));
+                .collect(Collectors.toList());
 
-        /* If statement prevents from returning all categories in expense tracker database in case of an empty list.
-           Default behaviour of API is that if a list is empty, it assumes that the parameter was not inputted, hence
-           returning all assets.
-         */
+        List<ExpenseCategory> expenseCategories;
 
-        if (assetIds.isEmpty()) {
-            assetIds = " ";
+        if (CollectionUtils.isEmpty(assetIds)) {
+            expenseCategories = Collections.emptyList(); // do not call DB, return empty list
+        } else {
+            expenseCategories = dataProvider.list(
+                    input.getOffset(),
+                    input.getLimit(),
+                    assetIds
+            );
         }
-
-        List<ExpenseCategory> expenseCategories = dataProvider.list(
-                input.getOffset(),
-                input.getLimit(),
-                assetIds
-        );
 
         return Output.builder()
                 .expenseCategories(expenseCategories)
@@ -67,7 +67,7 @@ public class ListCategoriesUseCase {
         private String jwt;
         private Integer offset;
         private Integer limit;
-        private String ids;
+        private List<String> ids;
     }
 
     @AllArgsConstructor

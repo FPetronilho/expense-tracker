@@ -17,6 +17,7 @@ public interface PortfolioManagerDataProvider {
     List<AssetResponse> listAssets(
             String jwt,
             String digitalUserId,
+            List<String> externalIds,
             Integer offset,
             Integer limit,
             String groupId,

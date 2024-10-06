@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,13 +34,12 @@ public class ExpenseCategoryDataProviderNoSql implements ExpenseCategoryDataProv
     }
 
     @Override
-    public List<ExpenseCategory> list(Integer offset, Integer limit, String ids) {
+    public List<ExpenseCategory> list(Integer offset, Integer limit, List<String> ids) {
         Query query = new Query();
 
         // If a list of IDs is provided and not null, filter for those specific IDs
-        if (ids != null && !ids.isEmpty()) {
-            List<String> idsList = Arrays.asList(ids.split(","));
-            query.addCriteria(Criteria.where("id").in(idsList));
+        if (!CollectionUtils.isEmpty(ids)) {
+            query.addCriteria(Criteria.where("id").in(ids));
         }
 
         query.with(PageRequest.of(offset, limit));
