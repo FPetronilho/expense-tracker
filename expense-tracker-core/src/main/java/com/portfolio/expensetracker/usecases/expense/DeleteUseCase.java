@@ -33,7 +33,7 @@ public class DeleteUseCase {
         if (!AssetResponse.PermissionPolicy.OWNER.equals(asset.getPermissionPolicy())) {
             throw new AuthorizationFailedException(
                     String.format(
-                            "Digital user %s can not delete expense %s because it is not its owner",
+                            "Digital user %s cannot delete expense %s because it is not its owner",
                             user.getId(),
                             input.getId()
                     )
