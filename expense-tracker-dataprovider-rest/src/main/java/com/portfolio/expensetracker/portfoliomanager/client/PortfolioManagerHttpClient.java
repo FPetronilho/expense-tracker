@@ -41,6 +41,7 @@ public interface PortfolioManagerHttpClient {
     @DeleteMapping("/assets")
     void deleteAsset(
             @RequestHeader("Authorization") String authorization,
+            @RequestParam String digitalUserId,
             @RequestParam String externalId
     );
 }

@@ -40,7 +40,7 @@ public class DeleteCategoryUseCase {
             );
         }
 
-        portfolioManagerDataProvider.deleteAsset(input.getJwt(), input.getCategoryId());
+        portfolioManagerDataProvider.deleteAsset(input.getJwt(), user.getId(), input.getCategoryId());
         dataProvider.delete(input.getCategoryId());
     }
 

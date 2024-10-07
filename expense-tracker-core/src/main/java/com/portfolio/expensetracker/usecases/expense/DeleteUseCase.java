@@ -40,7 +40,7 @@ public class DeleteUseCase {
             );
         }
 
-        portfolioManagerDataProvider.deleteAsset(input.getJwt(), input.getId());
+        portfolioManagerDataProvider.deleteAsset(input.getJwt(), user.getId(), input.getId());
         dataProvider.delete(input.getId());
     }
 

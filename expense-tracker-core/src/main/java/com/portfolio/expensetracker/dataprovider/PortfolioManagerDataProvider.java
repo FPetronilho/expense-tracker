@@ -30,6 +30,7 @@ public interface PortfolioManagerDataProvider {
 
     void deleteAsset(
             String jwt,
+            String digitalUserId,
             String externalId
     );
 }

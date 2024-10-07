@@ -62,8 +62,9 @@ public class PortfolioManagerDataProviderRest implements PortfolioManagerDataPro
     @Override
     public void deleteAsset(
             String jwt,
+            String digitalUserId,
             String externalId
     ) {
-        client.deleteAsset(jwt, externalId);
+        client.deleteAsset(jwt, digitalUserId, externalId);
     }
 }
