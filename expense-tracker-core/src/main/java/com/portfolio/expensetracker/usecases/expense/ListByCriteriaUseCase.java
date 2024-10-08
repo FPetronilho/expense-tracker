@@ -8,10 +8,16 @@ import com.portfolio.expensetracker.domain.OrderDirection;
 import com.portfolio.expensetracker.dto.portfoliomanager.response.AssetResponse;
 import com.portfolio.expensetracker.security.context.DigitalUser;
 import com.portfolio.expensetracker.util.SecurityUtil;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +39,7 @@ public class ListByCriteriaUseCase {
         List<AssetResponse> assetResponseList = portfolioManagerDataProvider.listAssets(
                 input.getJwt(),
                 user.getId(),
+                input.getIds(),
                 input.getOffset(),
                 input.getLimit(),
                 "com.portfolio",
@@ -43,16 +50,18 @@ public class ListByCriteriaUseCase {
                 input.getTo()
         );
 
-        String assetIds = assetResponseList.stream()
+        List<String> assetIds = assetResponseList.stream()
                 .map(AssetResponse::getExternalId)
-                .collect(Collectors.joining(","));
-
-        if (assetIds.isEmpty()) {
-            assetIds = " ";
-        }
-
+                .collect(Collectors.toList());
         input.setIds(assetIds);
-        List<Expense> expenses = expenseDataProvider.listByCriteria(input);
+
+        List<Expense> expenses;
+
+        if (CollectionUtils.isEmpty(assetResponseList)) {
+            expenses = Collections.emptyList(); // do not call DB, return empty list
+        } else {
+            expenses = expenseDataProvider.listByCriteria(input);
+        }
 
         return Output.builder()
                 .expenses(expenses)
@@ -76,7 +85,7 @@ public class ListByCriteriaUseCase {
         private Float amountGte;
         private List<OrderBy> orderByList;
         private List<OrderDirection> orderDirectionList;
-        private String ids;
+        private List<String> ids;
     }
 
     @AllArgsConstructor

@@ -7,18 +7,23 @@ import com.portfolio.expensetracker.domain.OrderDirection;
 import com.portfolio.expensetracker.dto.ExpenseCreate;
 import com.portfolio.expensetracker.dto.ExpenseUpdate;
 import com.portfolio.expensetracker.exception.ParameterValidationFailedException;
-import com.portfolio.expensetracker.usecases.expense.*;
+import com.portfolio.expensetracker.usecases.expense.CreateUseCase;
+import com.portfolio.expensetracker.usecases.expense.DeleteUseCase;
+import com.portfolio.expensetracker.usecases.expense.FindByIdUseCase;
+import com.portfolio.expensetracker.usecases.expense.ListByCriteriaUseCase;
+import com.portfolio.expensetracker.usecases.expense.UpdateUseCase;
 import com.portfolio.expensetracker.util.AuthenticationConstants;
-import com.portfolio.expensetracker.util.Constants;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -51,7 +56,10 @@ public class ExpenseController implements ExpenseRestApi {
     @Override
     public ResponseEntity<Expense> findById(String id) {
         log.info("Finding expense: {}.", id);
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         FindByIdUseCase.Input input = FindByIdUseCase.Input.builder()
+                .jwt(jwt)
                 .id(id)
                 .build();
 
@@ -118,6 +126,10 @@ public class ExpenseController implements ExpenseRestApi {
 
         String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
 
+        List<String> idsList = StringUtils.hasText(ids)
+                ? List.of(ids.split(","))
+                : Collections.emptyList();
+
         // Method logic
         ListByCriteriaUseCase.Input input = ListByCriteriaUseCase.Input.builder()
                 .jwt(jwt)
@@ -132,7 +144,7 @@ public class ExpenseController implements ExpenseRestApi {
                 .amountLte(amountLte)
                 .orderByList(orderByList)
                 .orderDirectionList(orderDirectionList)
-                .ids(ids)
+                .ids(idsList)
                 .build();
 
         log.info("Listing expenses by criteria: {}.", input);
@@ -143,7 +155,10 @@ public class ExpenseController implements ExpenseRestApi {
     @Override
     public ResponseEntity<Expense> update(String id, ExpenseUpdate expenseUpdate) {
         log.info("Updating expense: {}. Updated expense data: {}.", id, expenseUpdate);
+        String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
+
         UpdateUseCase.Input input = UpdateUseCase.Input.builder()
+                .jwt(jwt)
                 .id(id)
                 .expenseUpdate(expenseUpdate)
                 .build();

@@ -12,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -50,11 +52,15 @@ public class ExpenseCategoryController implements ExpenseCategoryRestApi {
         log.info("Listing expenses: (offset={}, limit={}, ids={}.)", offset, limit, ids);
         String jwt = httpRequest.getHeader(AuthenticationConstants.Authentication.HTTP_HEADER_AUTHORIZATION);
 
+        List<String> idsList = StringUtils.hasText(ids)
+                ? List.of(ids.split(","))
+                : Collections.emptyList();
+
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
                 .jwt(jwt)
                 .offset(offset)
                 .limit(limit)
-                .ids(ids)
+                .ids(idsList)
                 .build();
 
         ListCategoriesUseCase.Output output = listCategoriesUseCase.execute(input);

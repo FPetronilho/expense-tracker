@@ -11,12 +11,14 @@ import com.portfolio.expensetracker.security.context.DigitalUser;
 import com.portfolio.expensetracker.util.Constants;
 import com.portfolio.expensetracker.util.SecurityUtil;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CreateCategoryUseCase {
 
     private final ExpenseCategoryDataProvider dataProvider;
@@ -28,7 +30,7 @@ public class CreateCategoryUseCase {
         DigitalUser digitalUser = SecurityUtil.getDigitalUser();
         ExpenseCategoryCreate expenseCategoryCreate = input.getExpenseCategoryCreate();
 
-        if (findExpenseCategoryByName(input.getJwt(), digitalUser, expenseCategoryCreate.getName())) {
+        if (findExpenseCategoryByName(input.getJwt(), expenseCategoryCreate.getName())) {
             throw new ResourceAlreadyExistsException(ExpenseCategory.class, expenseCategoryCreate.getName());
         }
 
@@ -45,7 +47,9 @@ public class CreateCategoryUseCase {
                     assetRequest
             );
         } catch (Exception e) {
-            dataProvider.delete(expenseCategory.getId());
+            log.error("could not create expense category. Reason: {}", e.getMessage());
+            dataProvider.delete(expenseCategory.getId()); // rollback operation
+            throw e; // propagate exception to Controller / upper method stack
         }
 
         return Output.builder()
@@ -53,10 +57,8 @@ public class CreateCategoryUseCase {
                 .build();
     }
 
-    // TODO: Decide whether this check should be done or, if the user can have multiple categories with the same name
     private boolean findExpenseCategoryByName(
             String jwt,
-            DigitalUser digitalUser,
             String categoryName
     ) {
         ListCategoriesUseCase.Input input = ListCategoriesUseCase.Input.builder()
@@ -71,11 +73,7 @@ public class CreateCategoryUseCase {
                 .map(ExpenseCategory::getName)
                 .toList();
 
-        if (categoryNames.contains(categoryName)) {
-            return true;
-        }
-
-        return false;
+        return categoryNames.contains(categoryName);
     }
 
     @AllArgsConstructor

@@ -4,10 +4,17 @@ spring.application:
   version: 0.0.1-SNAPSHOT
   environment: ${ENV}
 
+# default port for HTTP:   80
+# default port for HTTPS: 443
 server:
-  port: 8080
-  ssl.enabled: false # disable https
+  port: 8443
   servlet.context-path: /${spring.application.name}
+  ssl:
+    enabled: true # enable https
+    key-store: classpath:certificate/expense-tracker.p12
+    key-store-password: SECRET_KEYSTORE_PASSWORD
+    key-store-type: PKCS12
+    key-alias: expense-tracker
 
 logging.level:
   root: INFO

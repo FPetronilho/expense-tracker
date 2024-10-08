@@ -1,7 +1,9 @@
 ###################  Microservice base configuration  ###################
 spring.application.environment: local
 
-server.port: 8080
+server:
+  port: 8443
+  ssl.key-store-password: Portfolio2k24!
 
 
 ###################  Authentication and Authorization  ###################
@@ -18,4 +20,4 @@ spring.data.mongodb.uri: mongodb://localhost:27017/ExpenseTracker
 
 ###################  Data Provider REST configuration  ###################
 http.url:
-  portfolio-manager: "http://localhost:8081/portfolio-manager/api/v1"
+  portfolio-manager: "https://localhost:8444/portfolio-manager/api/v1"

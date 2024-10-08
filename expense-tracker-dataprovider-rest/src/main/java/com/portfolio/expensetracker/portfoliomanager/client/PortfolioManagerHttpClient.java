@@ -27,6 +27,7 @@ public interface PortfolioManagerHttpClient {
     List<AssetResponse> listAssets(
             @RequestHeader("Authorization") String authorization,
             @RequestParam String digitalUserId,
+            @RequestParam String externalIds,
             @RequestParam Integer offset,
             @RequestParam Integer limit,
             @RequestParam("artifactInfo.groupId") String groupId,
@@ -40,6 +41,7 @@ public interface PortfolioManagerHttpClient {
     @DeleteMapping("/assets")
     void deleteAsset(
             @RequestHeader("Authorization") String authorization,
+            @RequestParam String digitalUserId,
             @RequestParam String externalId
     );
 }
