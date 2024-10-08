@@ -33,7 +33,7 @@ public class UpdateUseCase {
         if (!AssetResponse.PermissionPolicy.OWNER.equals(asset.getPermissionPolicy())) {
             throw new AuthorizationFailedException(
                     String.format(
-                            "Digital user %s can not update expense %s because it is not its owner",
+                            "Digital user %s cannot update expense %s because it is not its owner",
                             user.getId(),
                             input.getId()
                     )

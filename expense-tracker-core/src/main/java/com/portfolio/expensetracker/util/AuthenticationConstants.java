@@ -3,8 +3,11 @@ package com.portfolio.expensetracker.util;
 import lombok.*;
 import org.springframework.http.HttpMethod;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthenticationConstants {
+
+    public AuthenticationConstants() {
+        throw new IllegalStateException("Cannot instantiate a util class");
+    }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Authentication {
