@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 public class AuthenticationConstants {
 
     public AuthenticationConstants() {
-        throw new IllegalStateException("Cannot instantiate a util class");
+        throw new IllegalStateException("Cannot instantiate an util class.");
     }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)

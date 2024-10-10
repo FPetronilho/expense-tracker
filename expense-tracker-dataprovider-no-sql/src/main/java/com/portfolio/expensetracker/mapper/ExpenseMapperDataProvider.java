@@ -27,6 +27,7 @@ public interface ExpenseMapperDataProvider {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dbId", ignore = true)
     @Mapping(target = "category", source = "categoryId", qualifiedByName = "resolveCategoryId")
+    @Mapping(target = "date", ignore = true)
     void updateExpenseDocument(
             @MappingTarget ExpenseDocument expenseDocument,
             ExpenseUpdate expenseUpdate,
@@ -41,10 +42,12 @@ public interface ExpenseMapperDataProvider {
         return categoryId != null ? expenseCategoryDataProvider.findById(categoryId) : null;
     }
 
-    @Mapping(target = "dbId", ignore = true)
-    ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategory expenseCategory);
-
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "dbId", ignore = true)
+    @Mapping(target = "category", ignore = true)
+    @Mapping(target = "date", ignore = true)
     ExpenseDocument toExpenseDocument(ExpenseCreate expenseCreate);
+
+    @Mapping(target = "dbId", ignore = true)
+    ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategory expenseCategory);
 }

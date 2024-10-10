@@ -21,6 +21,7 @@ public interface ExpenseCategoryMapperDataProvider {
 
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     @Mapping(target = "dbId", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
     ExpenseCategoryDocument toExpenseCategoryDocument(ExpenseCategoryCreate expenseCategoryCreate);
 
     @Mapping(target = "dbId", ignore = true)
