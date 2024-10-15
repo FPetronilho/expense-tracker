@@ -108,7 +108,6 @@ public class ExpenseDataProviderNoSqlTest {
         // Given
         String id = "test-id";
 
-        ExpenseDocument expenseDocument = new ExpenseDocument();
         when(mongoTemplate.findOne(any(Query.class), eq(ExpenseDocument.class))).thenReturn(null);
 
         // When & Then
