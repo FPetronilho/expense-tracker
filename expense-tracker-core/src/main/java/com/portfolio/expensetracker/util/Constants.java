@@ -3,7 +3,7 @@ package com.portfolio.expensetracker.util;
 public class Constants {
 
     public Constants() {
-        throw new IllegalStateException("Cannot instantiate a util class");
+        throw new IllegalStateException("Cannot instantiate an util class.");
     }
 
     // Default values

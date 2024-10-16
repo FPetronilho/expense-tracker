@@ -19,4 +19,12 @@ public class ExpenseCategoryDocument extends BaseDocument {
     private String name;
     private String description;
     private boolean isDefault;
+
+    public boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
 }

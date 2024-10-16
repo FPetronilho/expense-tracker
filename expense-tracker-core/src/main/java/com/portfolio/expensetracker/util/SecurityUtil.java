@@ -6,8 +6,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUtil {
 
-    private SecurityUtil() {
-        throw new IllegalStateException("Cannot instantiate a util class");
+    public SecurityUtil() {
+        throw new IllegalStateException("Cannot instantiate an util class.");
     }
 
     public static DigitalUser getDigitalUser() {
@@ -22,5 +22,4 @@ public class SecurityUtil {
 
         throw new InternalServerErrorException("could not retrieve Digital User from Spring Security Context");
     }
-
 }
